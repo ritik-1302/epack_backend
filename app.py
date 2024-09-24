@@ -1,8 +1,10 @@
 import os
 import json
 import logging
+import io
 
-from flask import Flask, request, jsonify,abort
+from flask import Flask, request, jsonify,abort,Response,send_file,make_response
+
 import ezdxf
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -12,9 +14,9 @@ from pymongo.server_api import ServerApi
 
 from dxf_extractor import DXFExtractor
 from aws_utils.s3_utils import S3Utils
-from  auth_handler import AuthHandler
+from  user_handler import UserHandler
 from project_handler import ProjectHandler
-
+from excel_generator import ExcelGenerator
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
@@ -137,7 +139,7 @@ def get_parts_info():
         
 @app.route('/register', methods=['POST'])
 def register():
-    auth=AuthHandler()
+    auth=UserHandler()
     data = request.get_json()
     username = data['username']
     password = data['password'].encode('utf-8')
@@ -149,10 +151,11 @@ def register():
     
 @app.route('/login',methods=['POST'])
 def login():
-        auth=AuthHandler()
+        auth=UserHandler()
         data = request.get_json()
         username = data['username']
         password = data['password'].encode('utf-8')
+        
         
         if auth.user_login(username=username,password=password):
             return jsonify({'message': 'Login successful'}), 200
@@ -176,10 +179,11 @@ def get_projects():
 def add_project():
     project_handler=ProjectHandler()
     data = request.get_json()
-    username=data['username']
-    project_name=data['projectname']
+    usernames=data['username']
+    project_names=data['projectname']
+    is_new=data["isnew"]
     
-    updated_list=project_handler.make_a_new_project(username,project_name)
+    updated_list=project_handler.make_a_new_project(usernames,project_names,is_new=is_new)
     
     if updated_list==False:
         return jsonify({'message': 'Invalid Username'}),401
@@ -196,6 +200,53 @@ def get_project_files():
          return jsonify({'data':file_list}),200
     except Exception as e:
         abort(406,description=str(e))
+        
+        
+@app.route('/get_all_users',methods=['GET'])
+def get_all_users():
+    user_handler=UserHandler()
+    try:
+        user_list=user_handler.get_list_of_all_user()
+        return jsonify({'data':user_list}),200
+    except Exception as e:
+        abort(406,description=str(e))
+        
+@app.route('/download_boq', methods=['GET'])        
+def download_boq():
+    file_name = request.args.get('filename')
+    s3_utils = S3Utils()
+
+    try:
+        # Download data from S3 and parse JSON
+        json_body = s3_utils.download_data_from_s3(file_name)
+        # dump = json.loads(json_body)
+
+        # Generate Excel file as a binarreturnsy object (assuming generate_excel_for_phase returns file-like object)
+        
+        excel_generator = ExcelGenerator(json_body)
+        excel_file = excel_generator.generate_excel_for_phase("place_holder")
+
+        # Create in-memory file-like object
+        output = io.BytesIO()
+        excel_file.save(output)
+        output.seek(0)
+
+        # Create a response object and set headers
+        response = make_response(send_file(output, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                           as_attachment=True,
+                                           download_name=f"{file_name}.xlsx"))
+        
+        response.headers['Content-Disposition'] = f'attachment; filename={file_name}.xlsx'
+        response.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        
+        return response
+
+    except Exception as e:
+        abort(406, description=str(e))
+    
+    
+
+    
     
     
     

@@ -12,17 +12,26 @@ class ExcelGenerator:
         sheet=wb.active
         
         for block_name,block_details in  self.block_wise_parts_dict.items():
+            total_sa=0
+            total_w=0
+            
+            for parts_dict in block_details['parts']:
+                total_sa=total_sa+parts_dict["Area (m2)"]
+                total_w=total_w+parts_dict["Weight (kg)"]
+                
+                
+            
             sheet.append([])
             sheet.append(self.block_header_list)
-            sheet.append([])
+            sheet.append(["","COLUMN","",block_name,"","",total_w,"",total_sa,""])
             sheet.append(["","","","","","","","","","","PART MARK","PART DESCRIPTION",	"LENGTH","WIDTH",	"THK.", "QTY.",	"QTY./BLDG.",	"YIELD",	"WEIGHT",	"SURFACE AREA (M2)"])
             for parts_dict in block_details['parts']:
                 sheet.append(["","","","","","","","","","",parts_dict["Part Name"],"",parts_dict['Length (mm)'],parts_dict["Width (mm)"],parts_dict["Thickness (mm)"],parts_dict["Quantity"],"","",parts_dict["Weight (kg)"],parts_dict["Area (m2)"]])
         
         
-        wb.save("output.xlsx",)
-        wb.close()
-        
+        # wb.save("output.xlsx",)
+        # wb.close()
+        return wb
         
         
 

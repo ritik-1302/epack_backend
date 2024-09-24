@@ -1,8 +1,8 @@
 import logging
 import bcrypt
-
 from mongodb_handler import MongodbHandler
-class AuthHandler:
+
+class UserHandler:
     def __init__(self) -> None:
         mongo=MongodbHandler()
         self.users_collection=mongo.mongo_collection('epack_test','users')
@@ -41,6 +41,23 @@ class AuthHandler:
         else:
             self.logger.error("Password didnt matched")
             False
+            
+    
+    def get_list_of_all_user(self):
+        result=[]
+        user_list=self.users_collection.find({},{"_id": 0, "username": 1})
         
+        if user_list==[]:
+            self.logger.error('no user in the project')
+        else:
+            self.logger.info("Sucessfully retrived the list of the users")
+        for user in user_list:
+            result.append(user['username'])
+            
+        return result 
         
-   
+
+
+# if __name__=="__main__":
+#     print(UserHandler().get_list_of_all_user())
+    
