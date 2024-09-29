@@ -52,10 +52,21 @@ class ProjectHandler:
                     
         self.logger.info("Deleted  the projects from the user")
         return True
+    
+    def get_all_project_access_list(self):
+        project_access_list=self.project_access_collection.find({},{"_id":0})
+        if project_access_list==[]:
+            self.logger.error('no entry in the daatbase')
+        else:
+            self.logger.info("Sucessfully retrived the list of the all projects")
+        
+        return list(project_access_list)
+        
+        
         
             
-# if __name__ =="__main__":
-#     print(ProjectHandler().remove_project_access(['abc'],['test2']))
+if __name__ =="__main__":
+    print(ProjectHandler().get_all_project_access_list())
     
             
         

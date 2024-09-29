@@ -261,7 +261,16 @@ def remove_project():
     else:
         return jsonify({'message':'project added sucessfully'}),200
     
+
+@app.route('/get_project_access_list',methods=["GET"])
+def get_project_acess_list():
+   project_handler= ProjectHandler()
+   project_acesss_list=project_handler.get_all_project_access_list()
    
+   if project_acesss_list==[]:
+        return jsonify({'message': 'No entires found in the colllection'}),401
+   else:
+        return jsonify({'data':project_acesss_list}),200
     
 
     
