@@ -189,6 +189,7 @@ def add_project():
         return jsonify({'message': 'Invalid Username'}),401
     else:
         return jsonify({'message':'project added sucessfully'}),200
+    
 
 
 @app.route('/get_project_files',methods=['GET'])
@@ -246,6 +247,21 @@ def download_boq():
     except Exception as e:
         abort(406, description=str(e))
     
+
+@app.route('/remove_project',methods=['DELETE'])
+def remove_project():
+    project_handler=ProjectHandler()
+    data = request.get_json()
+    usernames=data['username']
+    project_names=data['projectname']
+    updated_list=project_handler.remove_project_access(project_names=project_names,usernames=usernames)
+    
+    if updated_list==False:
+        return jsonify({'message': 'Invalid Username'}),401
+    else:
+        return jsonify({'message':'project added sucessfully'}),200
+    
+   
     
 
     
