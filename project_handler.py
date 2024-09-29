@@ -62,11 +62,22 @@ class ProjectHandler:
         
         return list(project_access_list)
         
+    def delete_project(self,project_name):
+        query_res=self.project_access_collection.update_many({"projects":project_name},{ "$pull": { "projects": project_name } })
+        
+        
+        if query_res.modified_count:
+            self.logger.info(f"there is no project named {project_name}")
+        else:
+            self.logger.info(f"{project_name } project sucessfully deleted")
+        
+        return query_res
+        
         
         
             
 if __name__ =="__main__":
-    print(ProjectHandler().get_all_project_access_list())
+    print(ProjectHandler().delete_project('abc'))
     
             
         

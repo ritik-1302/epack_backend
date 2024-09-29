@@ -248,8 +248,8 @@ def download_boq():
         abort(406, description=str(e))
     
 
-@app.route('/remove_project',methods=['DELETE'])
-def remove_project():
+@app.route('/remove_project_access',methods=['DELETE'])
+def remove_project_access():
     project_handler=ProjectHandler()
     data = request.get_json()
     usernames=data['username']
@@ -273,9 +273,16 @@ def get_project_acess_list():
         return jsonify({'data':project_acesss_list}),200
     
 
+@app.route('/remove_project',methods=["DELETE"])
+def remove_project():
+    project_name=request.args.get('projectname')
+    project_handler=ProjectHandler()
+    res=project_handler.delete_project(project_name=project_name)
     
-    
-    
+    if res:
+        return jsonify({'message': 'Sucessfully deleted the project'}),200
+    else:
+        return jsonify({'message': 'Cannot delete the project'}),400    
     
    
 
