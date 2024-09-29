@@ -13,7 +13,7 @@ from pymongo.server_api import ServerApi
 
 
 from dxf_extractor import DXFExtractor
-from aws_utils.s3_utils import S3Utils
+from s3_utils import S3Utils
 from  user_handler import UserHandler
 from project_handler import ProjectHandler
 from excel_generator import ExcelGenerator
@@ -89,8 +89,8 @@ def get_dxf_info():
 
     if dxf_file and allowed_file(dxf_file.filename):
         logging.info("DXF File Detected")
-        filename = secure_filename(dxf_file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        hashed_filename = secure_filename(dxf_file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], hashed_filename)
         dxf_file.save(filepath)
         logging.info(f"DXF File path {filepath}")
         f=open("counter.txt","r")
@@ -110,8 +110,8 @@ def get_dxf_info():
             result_data=extractor.extract_parts_from_block(image_width=width,image_height=height)
             s3_util=S3Utils()
             try:
-                filename=s3_util.upload_data_to_s3(project_name=project_name,string_json_data=json.dumps(result_data))
-                return jsonify({'file_name': filename })
+                hashed_filename=s3_util.upload_data_to_s3(project_name=project_name,string_json_data=json.dumps(result_data),orignal_filename=dxf_file.filename)
+                return jsonify({'file_name': hashed_filename })
                 
             except Exception as e:
                 abort(406,description=str(e))
@@ -214,7 +214,9 @@ def get_all_users():
 @app.route('/download_boq', methods=['GET'])        
 def download_boq():
     file_name = request.args.get('filename')
+    phase=request.args.get("phase")
     s3_utils = S3Utils()
+    
 
     try:
         # Download data from S3 and parse JSON
@@ -224,7 +226,7 @@ def download_boq():
         # Generate Excel file as a binarreturnsy object (assuming generate_excel_for_phase returns file-like object)
         
         excel_generator = ExcelGenerator(json_body)
-        excel_file = excel_generator.generate_excel_for_phase("place_holder")
+        excel_file = excel_generator.generate_excel_for_phase(phase_name=phase)
 
         # Create in-memory file-like object
         output = io.BytesIO()

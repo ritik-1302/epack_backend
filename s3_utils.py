@@ -5,6 +5,7 @@ import hashlib
 import json 
 import boto3
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError, ClientError
+from mongodb_handler import MongodbHandler
 
 class S3Utils:
     def __init__(self) -> None:
@@ -16,20 +17,28 @@ class S3Utils:
         )
         self.s3=session.client('s3')
         self.logger=logging.getLogger(self.__class__.__name__)
+        self.file_metadata_collection=MongodbHandler().mongo_collection("epack_test","file_metadata")
+        
         
     
-    def upload_data_to_s3(self,project_name:str,string_json_data:str)->str:
-        file_name=f"{project_name}/{hashlib.md5(string_json_data.encode()).hexdigest()}"
+    def upload_data_to_s3(self,project_name:str,string_json_data:str,orignal_filename:str)->str:
+        hashed_file_name=f"{project_name}/{hashlib.md5(string_json_data.encode()).hexdigest()}"
         try:
             self.s3.put_object(
                 Bucket=os.getenv('S3_BUCKET'),
-                Key=file_name,
+                Key=hashed_file_name,
                 Body=string_json_data,
                 ContentType='application/json'
                 
             )
-            self.logger.info(f'File {file_name} uploaded successfully to {os.getenv("S3_BUCKET")} S3 BUCKET')
-            return file_name
+            self.logger.info(f'File {hashed_file_name} uploaded successfully to {os.getenv("S3_BUCKET")} S3 BUCKET')
+            if   self.file_metadata_collection.find_one({"hashed_file_name":hashed_file_name,"orginal_file_name":orignal_filename}) :
+                  self.logger.info("Attempt to upload duplicate")
+            else:
+                self.file_metadata_collection.insert_one({"hashed_file_name":hashed_file_name,"orginal_file_name":orignal_filename})
+                self.logger.info(f'File {hashed_file_name} metaData uploaded successfully to MongoDB')
+            
+            return hashed_file_name
 
         except NoCredentialsError:
             self.logger.error("Error: AWS credentials not found.")
@@ -64,7 +73,8 @@ class S3Utils:
             
             
     def get_files_for_project(self,project_name):
-        result =[]
+        hashed_file_list =[]
+       
         try :
             project_file_metadata=self.s3.list_objects(Bucket=os.getenv("S3_BUCKET"),Prefix=project_name) 
             
@@ -74,9 +84,21 @@ class S3Utils:
                 self.logger.info("No Files in the Project")
                 
             for file_metadata in project_file_metadata['Contents']:
-                result.append(file_metadata['Key'])
+                hashed_file_list.append(file_metadata['Key'])
+            
+            self.logger.info("Fetching files from the metadata")
+            documents=self.file_metadata_collection.find({
+                "hashed_file_name":{"$in":hashed_file_list},
+                
+            },{"_id":0})
+           
+            
+            return list(documents)
             
             
+            
+            
+           
             
             
         
@@ -90,7 +112,7 @@ class S3Utils:
             self.logger.error(f"An unexpected error occurred: {str(e)}")        
         
         
-        return result
+       
         
         
         
@@ -99,6 +121,6 @@ class S3Utils:
     
     
 
-# if __name__ =="__main__":
-#     s3=S3Utils()
-#     print(s3.get_files_for_project('test-epack'))
+if __name__ =="__main__":
+    s3=S3Utils()
+    print(s3.get_files_for_project('epack-test'))
