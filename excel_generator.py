@@ -14,7 +14,12 @@ class ExcelGenerator:
         for block_name,block_details in  self.block_wise_parts_dict.items():
             total_sa=0
             total_w=0
-            phase_qty=int(block_details['phase'][phase_name])
+            
+            if block_details['phase'].get(phase_name) is not None:
+                phase_qty=int(block_details['phase'][phase_name])
+            else:
+                phase_qty=1
+                
             for parts_dict in block_details['parts']:
                 total_sa=total_sa+parts_dict["Area (m2)"]
                 total_w=total_w+parts_dict["Weight (kg)"]
