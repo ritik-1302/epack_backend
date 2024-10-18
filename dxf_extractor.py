@@ -2,6 +2,8 @@ import re
 import logging
 import ezdxf
 from image_generator import ImageGenerator
+from inventory_handler import InventoryHandler
+import math
 
 class DXFExtractor:
     def __init__(self,doc,density) -> None:
@@ -66,16 +68,18 @@ class DXFExtractor:
                                 val=dimension.split('X')
                                 parts_dict[block.name][part_name]=val[1]+'x'+val[2]    
                                 
-                        # elif re.match(self.pipe_regex_DIMENSION_pattern, entity.dxf.text):
-                        #     part_txt=entity.dxf.text[2:]
-                        #     name,extra_text= part_txt.split('~')
-                        #     parts_dict[block.name][name]=name
+                        elif re.match(self.pipe_regex_DIMENSION_pattern, entity.dxf.text):
+                            part_txt=entity.dxf.text[2:]
+                            name,extra_text= part_txt.split('~')
+                            name=name.strip()
+                            parts_dict[block.name][name]=name
                                            
         return parts_dict
 
     
     
     def extract_parts_from_block(self,image_width,image_height):
+        inventory_list = InventoryHandler().get_inventory_list()
         latest_revision_block_list=self.filter_blocks_list()
         block_wise_parts_dict={}
         parts_dict=self.make_parts_dict()
@@ -130,9 +134,28 @@ class DXFExtractor:
                             block_wise_parts_dict[block.name]["phase"][phase_name]=float(phase_qty)
                             
                     
-                    elif entity.dxftype()=="MTEXT" and re.match(self.pipe_regex_MTEXT_pattern, entity.dxf.text) and block.name in latest_revision_block_list:
-                       pass
-                      
+                    elif entity.dxftype()=="MTEXT" and re.match(self.pipe_regex_MTEXT_pattern, entity.dxf.text):
+                        part_str=entity.dxf.text[4:]
+                        length,str0,pipename=part_str.split(" ")
+                        partname,str1=str0.split('~')
+                        pipe_name=str1.split(';')[2]
+                        pipe_mark=pipe_name+pipename[0:3]
+                        # print(partname,length,pipe_name+pipename[0:3])
+                        pipe=next((item for item in inventory_list if item["itemDescription"] == pipe_mark), None)
+                        # print(temp)
+                        for key,value in parts_dict.items():
+                            if value.get(partname) and track_dict[key].get(partname) is None:
+                                block_wise_parts_dict[key]['parts'].append({
+                            "Part Name": partname.upper(),
+                            "Thickness (mm)": int(pipe["thickness"]),
+                            "Quantity": 1,
+                            "Length (mm)": int(length),
+                            "Width (mm)": int(pipe["thickness"]),
+                            "Area (m2)": (2*math.pi*math.pow(int(pipe["thickness"])/2,2)+math.pi*int(pipe["thickness"])*int(length))/1000000,
+                            "Volume (m3)": (math.pi*math.pow(int(pipe["thickness"])/2,2)*int(length))/1000000000,
+                            "Weight (kg)": int(pipe["weightPerMeter"])*int(length)/1000
+                            })
+                        
         
         self.logger.info("Sucessfully generated blockwise parts dict")
                                        
@@ -146,13 +169,16 @@ class DXFExtractor:
                        
         
         
-# if __name__=="__main__":    
+if __name__=="__main__":    
 
-#        import json
-#        doc=ezdxf.readfile('/home/ritikshah/Downloads/revision_internal.dxf')
-#        extractor=DXFExtractor(doc,3)
-#     #    print(extractor.filter_blocks_list())
-#        print(extractor.extract_parts_from_block(300,300))
+       import json
+       doc=ezdxf.readfile('/home/ritikshah/Downloads/inventory_1.dxf')
+       extractor=DXFExtractor(doc,3)
+    #    print(extractor.filter_blocks_list())
+    #    print(extractor.extract_parts_from_block(300,300))
+    #    print(extractor.extract_parts_from_block(300,300))
+       with open('data.json', 'w') as outfile:
+           json.dump(extractor.extract_parts_from_block(300, 300), outfile)
     
 
 
