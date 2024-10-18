@@ -7,15 +7,45 @@ class DXFExtractor:
     def __init__(self,doc,density) -> None:
         self.parts_regex_pattern = r"\\A1;\d+X\d+X\d+ \w+(\~\d+)?"
         self.phase_regex_pattern=r"~PHASE_\d+/\d+"
+        self.pipe_regex_MTEXT_pattern=r'\\A\d+;\d+ PB\d~{\\A\d+;\\C\d+;\d+NB \(M\)PIPE}'
+        self.pipe_regex_DIMENSION_pattern=r'<> PB\d~{\\A\d+;\\C\d+;\d+NB \(M\)PIPE}'
         self.doc=doc
         self.density=density
         self.logger=logging.getLogger(self.__class__.__name__)
+    
+    def filter_blocks_list(self):
+        latest_revision_dict={}
+        block_list=[]
+        for block in self.doc.blocks:
+            if block.name.startswith('mark_'):
+                match=re.search(r'(\d+)$',block.name)
+                revisionless_block_name=block.name.replace(match.group(1),'')
+                if match:
+                    revision_number = int(match.group(1))
+                    if block.name in latest_revision_dict:
+                        if revision_number > latest_revision_dict[block.name]:
+                            latest_revision_dict[revisionless_block_name] = revision_number
+                    else:
+                        latest_revision_dict[revisionless_block_name] = revision_number
+        
+        
+        for block in self.doc.blocks:
+            if block.name.startswith('mark_'):
+                match=re.search(r'(\d+)$', block.name)
+                revisionless_block_name=block.name.replace(match.group(1), '')
+                if match:
+                    revision_number = int(match.group(1))
+                    if revision_number == latest_revision_dict[revisionless_block_name]:
+                        block_list.append(block.name)
+        return block_list
+
         
     
     def make_parts_dict(self):
+        latest_revision_block_list=self.filter_blocks_list()
         parts_dict={}
         for block in self.doc.blocks:
-            if block.name.startswith('mark_'):
+            if block.name.startswith('mark_') and block.name in latest_revision_block_list :
                 parts_dict[block.name]={}
                 for entity in block:
                     
@@ -30,19 +60,23 @@ class DXFExtractor:
                             else:
                                 part_name=name
                                 parts_qty=1.0
-                            
-                           
                                 
                                 
                             if 'X' in dimension:
                                 val=dimension.split('X')
-                                parts_dict[block.name][part_name]=val[1]+'x'+val[2]        
+                                parts_dict[block.name][part_name]=val[1]+'x'+val[2]    
+                                
+                        # elif re.match(self.pipe_regex_DIMENSION_pattern, entity.dxf.text):
+                        #     part_txt=entity.dxf.text[2:]
+                        #     name,extra_text= part_txt.split('~')
+                        #     parts_dict[block.name][name]=name
                                            
         return parts_dict
 
     
     
     def extract_parts_from_block(self,image_width,image_height):
+        latest_revision_block_list=self.filter_blocks_list()
         block_wise_parts_dict={}
         parts_dict=self.make_parts_dict()
         track_dict={}
@@ -88,12 +122,16 @@ class DXFExtractor:
                     
                                 track_dict[key][part_name]=True
                                 
-                    elif entity.dxftype()=="MTEXT" and re.match(self.phase_regex_pattern,entity.dxf.text):
+                    elif entity.dxftype()=="MTEXT" and re.match(self.phase_regex_pattern,entity.dxf.text) and block.name in latest_revision_block_list:
                         phase_strings= re.findall(self.phase_regex_pattern,entity.dxf.text)
                         for phase_str in phase_strings:
                             phase_str=phase_str[1:]
                             phase_name,phase_qty=phase_str.split("/")
                             block_wise_parts_dict[block.name]["phase"][phase_name]=float(phase_qty)
+                            
+                    
+                    elif entity.dxftype()=="MTEXT" and re.match(self.pipe_regex_MTEXT_pattern, entity.dxf.text) and block.name in latest_revision_block_list:
+                       pass
                       
         
         self.logger.info("Sucessfully generated blockwise parts dict")
@@ -108,15 +146,13 @@ class DXFExtractor:
                        
         
         
-if __name__=="__main__":    
+# if __name__=="__main__":    
 
-       import json
-       doc=ezdxf.readfile('/home/ritikshah/Downloads/ADVANCE SOFTWEAR DRAWING.dxf')
-       extractor=DXFExtractor(doc,3)
-       json_object=json.dumps(extractor.extract_parts_from_block(300,300))
-       with open("test.json","w") as outfile:
-           outfile.write(json_object)
-    #    print(extractor.extract_parts_from_block())
+#        import json
+#        doc=ezdxf.readfile('/home/ritikshah/Downloads/revision_internal.dxf')
+#        extractor=DXFExtractor(doc,3)
+#     #    print(extractor.filter_blocks_list())
+#        print(extractor.extract_parts_from_block(300,300))
     
 
 

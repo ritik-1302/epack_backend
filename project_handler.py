@@ -18,7 +18,7 @@ class ProjectHandler:
         
         else:
             self.logger.info(f"Recived the list of project for user {username}")
-            return user["projects"]
+            return user["projects"],user['inventory_access']
         
     
     def make_a_new_project(self,usernames,project_names,is_new):

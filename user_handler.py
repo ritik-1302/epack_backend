@@ -20,7 +20,7 @@ class UserHandler:
 
         # Store the user in MongoDB
         self.users_collection.insert_one({'username': username, 'password': hashed_password})
-        self.projects_acess_collections.insert_one({'username':username,'projects':[]})
+        self.projects_acess_collections.insert_one({'username':username,'projects':[],'inventory_access':False})
         self.logger.info("User Succesfully registerd")
 
         return True

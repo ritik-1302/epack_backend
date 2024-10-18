@@ -8,8 +8,6 @@ from flask import Flask, request, jsonify,abort,Response,send_file,make_response
 import ezdxf
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 
 
 from dxf_extractor import DXFExtractor
@@ -17,7 +15,10 @@ from s3_utils import S3Utils
 from  user_handler import UserHandler
 from project_handler import ProjectHandler
 from excel_generator import ExcelGenerator
+from inventory_handler import InventoryHandler
+
 app = Flask(__name__)
+
 CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
@@ -84,6 +85,12 @@ def get_dxf_info():
     if not project_name:
         logger.error('No project name Provided by user')
         abort(406,description='Project name not provided by user')
+        
+        
+    username=request.form.get('username')
+    if not username:
+        logger.error('No username Provided by user')
+        abort(406, description='Username not provided by user')
 
 
 
@@ -110,7 +117,7 @@ def get_dxf_info():
             result_data=extractor.extract_parts_from_block(image_width=width,image_height=height)
             s3_util=S3Utils()
             try:
-                hashed_filename=s3_util.upload_data_to_s3(project_name=project_name,string_json_data=json.dumps(result_data),orignal_filename=dxf_file.filename)
+                hashed_filename=s3_util.upload_data_to_s3(project_name=project_name,string_json_data=json.dumps(result_data),orignal_filename=dxf_file.filename,username=username)
                 return jsonify({'file_name': hashed_filename })
                 
             except Exception as e:
@@ -166,12 +173,12 @@ def login():
 def get_projects():
     project_handler=ProjectHandler()
     user_name=request.args.get('username')
-    project_list=project_handler.get_list_of_projects(username=user_name)
+    project_list,invetory_access=project_handler.get_list_of_projects(username=user_name)
     
     if project_list==False:
         return jsonify({'message': 'Invalid Username'}),401
     else:
-        return jsonify({'project_list':project_list}),200
+        return jsonify({'project_list':project_list,'invetory_access':invetory_access}),200
     
     
 
@@ -285,6 +292,56 @@ def remove_project():
         return jsonify({'message': 'Cannot delete the project'}),400    
     
    
+#-------------- Inventory Routes----------------------------
+@app.route('/get_inventory_list', methods=['GET'])
+def get_inventory_list():
+    inventory_handler=InventoryHandler()
+    try:
+        inventory_list=inventory_handler.get_inventory_list()
+        return jsonify({'data':inventory_list}),200
+    except Exception as e:
+        abort(406, description=str(e))
+        
+@app.route('/add_inventory_item', methods=['POST'])
+def add_inventory_item():
+    inventory_handler=InventoryHandler()
+    data = request.get_json()
+    try:
+        inventory_handler.create_inventory_item(item=data)
+        return jsonify({'message': 'Sucessfully added the inventory item'}),200
+    except Exception as e:
+        abort(406, description=str(e))
+        
+        
+@app.route('/delete_inventory_item', methods=['DELETE'])
+def delete_inventory_item():
+    inventory_handler=InventoryHandler()
+    data = request.get_json()
+    try:
+        inventory_handler.delete_inventory_item(item=data)
+        return jsonify({'message': 'Sucessfully deleted the inventory item'}),200
+    except Exception as e:
+        abort(406, description=str(e))
+        
+@app.route('/update_inventory_access',methods=['POST'])
+def update_inventory_access():
+    inventory_handler=InventoryHandler()
+    data = request.get_json()
+    try:
+        inventory_handler.update_inventory_access(users=data["username"])
+        return jsonify({'message': 'Sucessfully updated the inventory access'}),200
+    except Exception as e:
+        abort(406, description=str(e))
+
+@app.route('/revoke_inventory_access',methods=['POST'])
+def revoke_inventory_access():
+    inventory_handler=InventoryHandler()
+    data = request.get_json()
+    try:
+        inventory_handler.revoke_inventory_access(users=data["username"])
+        return jsonify({'message': 'Sucessfully revoked the inventory access'}),200
+    except Exception as e:
+        abort(406, description=str(e))
 
 
 if __name__ == '__main__':
