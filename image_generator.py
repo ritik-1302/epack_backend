@@ -18,11 +18,12 @@ class ImageGenerator:
             #     # lineweight_policy= config.LineweightPolicy.ABSOLUTE,
             #     # custom_fg_color='#000000'
             # )
-            cfg = config.Configuration(
-                background_policy=config.BackgroundPolicy.WHITE,
-                color_policy=config.ColorPolicy.WHITE,
-                lineweight_policy= config.LineweightPolicy.ABSOLUTE,
-            )
+            # cfg = config.Configuration(
+            #     background_policy=config.BackgroundPolicy.WHITE,
+            #     color_policy=config.ColorPolicy.WHITE,
+            #     lineweight_policy= config.LineweightPolicy.ABSOLUTE,
+            # )
+            cfg=config.Configuration()
         
             frontend = Frontend(context, backend,config=cfg)
             frontend.draw_entities(block)
