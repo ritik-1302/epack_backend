@@ -16,6 +16,7 @@ from  user_handler import UserHandler
 from project_handler import ProjectHandler
 from excel_generator import ExcelGenerator
 from inventory_handler import InventoryHandler
+from layout_handler import LayoutHandler
 
 app = Flask(__name__)
 
@@ -290,7 +291,9 @@ def remove_project():
         return jsonify({'message': 'Sucessfully deleted the project'}),200
     else:
         return jsonify({'message': 'Cannot delete the project'}),400    
-    
+
+
+
    
 #-------------- Inventory Routes----------------------------
 @app.route('/get_inventory_list', methods=['GET'])
@@ -342,6 +345,21 @@ def revoke_inventory_access():
         return jsonify({'message': 'Sucessfully revoked the inventory access'}),200
     except Exception as e:
         abort(406, description=str(e))
+        
+#------------------------------------------------------------#
+
+@app.route('/save_layout',methods=['POST'])
+def save_layout():
+    layout_handler=LayoutHandler()
+    table_metadata=request.get_json()
+    hashed_filename=request.args.get('filename')
+    try:
+        layout_handler.update_layout(table_metadata_object=table_metadata["positions"], hashed_filename=hashed_filename)
+        return jsonify({'message': 'Sucessfully saved the layout'}),200
+    except Exception as e:
+        abort(406, description=str(e))
+
+
 
 
 if __name__ == '__main__':

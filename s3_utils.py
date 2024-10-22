@@ -8,6 +8,7 @@ import boto3
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError, ClientError
 from mongodb_handler import MongodbHandler
 from datetime import datetime
+import json
 
 class S3Utils:
     def __init__(self) -> None:
@@ -25,6 +26,13 @@ class S3Utils:
     
     def upload_data_to_s3(self,project_name:str,string_json_data:str,orignal_filename:str,username:str)->str:
         hashed_file_name=f"{project_name}/{hashlib.md5(string_json_data.encode()).hexdigest()}"
+        parts_dict=json.loads(string_json_data)
+        table_metadata={}
+        for key,value in parts_dict.items():
+            table_metadata[key]={"x":0,"y":0,"scale":0.5}
+            
+        
+        
         try:
             self.s3.put_object(
                 Bucket=os.getenv('S3_BUCKET'),
@@ -37,7 +45,7 @@ class S3Utils:
             if   self.file_metadata_collection.find_one({"hashed_file_name":hashed_file_name,"orginal_file_name":orignal_filename}) :
                   self.logger.info("Attempt to upload duplicate")
             else:
-                self.file_metadata_collection.insert_one({"hashed_file_name":hashed_file_name,"orginal_file_name":orignal_filename,"username":username,"time":datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+                self.file_metadata_collection.insert_one({"hashed_file_name":hashed_file_name,"orginal_file_name":orignal_filename,"username":username,"time":datetime.now().strftime('%Y-%m-%d %H:%M:%S'),"table_metadata":table_metadata})
                 self.logger.info(f'File {hashed_file_name} metaData uploaded successfully to MongoDB')
             
             return hashed_file_name
