@@ -56,9 +56,9 @@ class DXFExtractor:
                                         "Quantity": int(qty),
                                         "Length (mm)": int(length),
                                         "Width (mm)": int(width),
-                                        "Area (m2)": area,
-                                        "Volume (m3)": volume,
-                                        "Weight (kg)": weight
+                                        "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                        "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
+                                        "Weight (kg)": round(weight,2) if round(weight, 2) else weight
                                         })
                                         duplicate_check_dict[block.name][part_name]=True
                                         
@@ -68,12 +68,15 @@ class DXFExtractor:
                                 
                                 try:
                                     part_str=virtual_entity.dxf.text[4:]
-                                    print(virtual_entity.dxf.text)
                                     length,str0,pipename=part_str.split(" ")
                                     partname,str1=str0.split('~')
                                     pipe_name=str1.split(';')[2]
                                     pipe_mark=pipe_name+pipename[0:3]
                                     pipe=next((item for item in inventory_list if item["itemDescription"] == pipe_mark), None)
+                                    area=(2*math.pi*math.pow(int(pipe["thickness"])/2,2)+math.pi*int(pipe["thickness"])*int(length))/1000000
+                                    volume=(math.pi*math.pow(int(pipe["thickness"])/2,2)*int(length))/1000000000
+                                    weight=int(pipe["weightPerMeter"])*int(length)/1000
+                                    
                                     if partname not in duplicate_check_dict[block.name]:
                                         block_wise_parts_dict[block.name]['parts'].append({
                                         "Part Name": partname.upper()+" "+f"({pipe_mark} PIPE)",
@@ -81,13 +84,13 @@ class DXFExtractor:
                                         "Quantity": 1,
                                         "Length (mm)": int(length),
                                         "Width (mm)": int(pipe["thickness"]),
-                                        "Area (m2)": (2*math.pi*math.pow(int(pipe["thickness"])/2,2)+math.pi*int(pipe["thickness"])*int(length))/1000000,
-                                        "Volume (m3)": (math.pi*math.pow(int(pipe["thickness"])/2,2)*int(length))/1000000000,
-                                        "Weight (kg)": int(pipe["weightPerMeter"])*int(length)/1000
+                                        "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                        "Volume (m3)": round(volume,2) if round(volume,2)!=0 else volume,
+                                        "Weight (kg)": round(weight,2) if round(weight,2)!=0 else weight 
                                         })
                                         duplicate_check_dict[block.name][partname]=True
                                 except Exception as e:
-                                    self.logger.error(f"Error    {e}"+virtual_entity.dxf.text)
+                                    self.logger.error(f"Error  yoo  {e}")
                                     
                     elif entity.dxftype() == "MTEXT" and re.match(self.phase_regex_pattern, entity.dxf.text):
                        try:
@@ -101,7 +104,6 @@ class DXFExtractor:
                             
                     elif entity.dxftype() == "MTEXT" and re.match(self.parts_regex_pattern[5:],entity.dxf.text):
                         try:
-                            print(entity.dxf.text)
                             part_str=entity.dxf.text.strip()
                             dimention,name=part_str.split(" ")
                             length, width, thickness = dimention.split("X")
@@ -127,9 +129,9 @@ class DXFExtractor:
                                 "Quantity": int(qty),
                                 "Length (mm)": int(length),
                                 "Width (mm)": int(width),
-                                "Area (m2)": area,
-                                "Volume (m3)": volume,
-                                "Weight (kg)": weight
+                                "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                "Volume (m3)": round(volume,2) if round(volume,2)!=0 else volume ,
+                                "Weight (kg)": round(weight,2) if round(weight,2)!=0 else weight
                                 })
                                 duplicate_check_dict[block.name][part_name]=True
                             
@@ -150,16 +152,15 @@ class DXFExtractor:
                        
         
         
-# if __name__=="__main__":    
+if __name__=="__main__":    
 
-#        import json
-#        doc=ezdxf.readfile('/home/ritikshah/Downloads/inventory_1.dxf')
-#        extractor=DXFExtractor(doc,3)
-#     #    print(extractor.filter_blocks_list())
-#     #    print(extractor.extract_parts_from_block(300,300))
-#     #    print(extractor.extract_parts_from_block(300,300))
-#        with open('data.json', 'w') as outfile:
-#            json.dump(extractor.extract_parts_from_block(300, 300), outfile)
+       import json
+       import ezdxf
+       doc=ezdxf.readfile('/home/ritikshah/Downloads/inventory_1.dxf')
+       extractor=DXFExtractor(doc,3)
+    #    print(extractor.extract_parts_from_block(300,300))
+       with open('data.json', 'w') as outfile:
+           json.dump(extractor.extract_parts_from_block(300, 300), outfile)
     
 
 
