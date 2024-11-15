@@ -25,14 +25,14 @@ class ProjectHandler:
         
         #update in username 
         for username in usernames:
-            user_project_list=self.get_list_of_projects(username=username)
+            user_project_list,blank=self.get_list_of_projects(username=username)
             for projectname in project_names:
                 if projectname not in user_project_list:
                     updated= self.project_access_collection.find_one_and_update({"username":username},{"$push":{"projects":projectname}},return_document=True)
         
         # update in admin acessss
         if is_new:
-                user_project_list=self.get_list_of_projects(username="epack")
+                user_project_list,blank=self.get_list_of_projects(username="epack")
                 for projetname in project_names:
                     if projectname not in user_project_list:
                         admin_project_list= self.project_access_collection.find_one_and_update({"username":'epack'},{"$push":{"projects":projetname}},return_document=True)
