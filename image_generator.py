@@ -12,6 +12,7 @@ class ImageGenerator:
         if block.name.startswith('mark_'):
             context = RenderContext(doc=self.doc)
             backend = svg.SVGBackend()
+            
             # cfg = config.Configuration(
             #     background_policy=config.BackgroundPolicy.WHITE,
             #     color_policy=config.ColorPolicy.BLACK,
@@ -23,7 +24,9 @@ class ImageGenerator:
             #     color_policy=config.ColorPolicy.WHITE,
             #     lineweight_policy= config.LineweightPolicy.ABSOLUTE,
             # )
-            cfg=config.Configuration()
+            cfg=config.Configuration(
+                lineweight_scaling=5
+            )
         
             frontend = Frontend(context, backend,config=cfg)
             frontend.draw_entities(block)

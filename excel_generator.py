@@ -90,10 +90,17 @@ class ExcelGenerator:
             item_type="UNKNOWN"
             
             for key,value in self.item_type_dict.items():
-                if key in block_name:
-                    item_type=value
-                    break
-                
+                try:
+                    item_name=block_name.split("_")[1];
+                    print(item_name)
+                    item_name=''.join(i for i in item_name if i.isdigit()==False)
+                    print(item_name)
+                    if key.lower() == item_name.lower():
+                        item_type=value
+                        break
+                except Exception as e:
+                    self.logger.error(f"Error  {e}")
+                    continue
                 
             
             sheet.append([])
