@@ -1,31 +1,28 @@
 import logging
 from ezdxf.addons.drawing import Frontend, RenderContext, svg, layout,config
 import ezdxf
+import re
+
 
 class ImageGenerator:
     def __init__(self,doc) -> None:
         self.doc=doc
         self.logger=logging.getLogger(self.__class__.__name__)
-    
+        phase_regex_pattern=r"~PHASE_\d+/\d+"
+        for block in doc.blocks:
+             for entity in block:
+                if entity.dxftype() == 'MTEXT' and  not re.match(phase_regex_pattern,entity.dxf.text):
+                    entity.dxf.char_height*=1.4        
+            
     def generate_image_of_block(self,block_name,width,height):
         block = self.doc.blocks.get(block_name)
         if block.name.startswith('mark_'):
+            self.logger.info("Image string generation started")
             context = RenderContext(doc=self.doc)
             backend = svg.SVGBackend()
-            
-            # cfg = config.Configuration(
-            #     background_policy=config.BackgroundPolicy.WHITE,
-            #     color_policy=config.ColorPolicy.BLACK,
-            #     # lineweight_policy= config.LineweightPolicy.ABSOLUTE,
-            #     # custom_fg_color='#000000'
-            # )
-            # cfg = config.Configuration(
-            #     background_policy=config.BackgroundPolicy.WHITE,
-            #     color_policy=config.ColorPolicy.WHITE,
-            #     lineweight_policy= config.LineweightPolicy.ABSOLUTE,
-            # )
             cfg=config.Configuration(
-                lineweight_scaling=5
+                lineweight_scaling=5,
+            
             )
         
             frontend = Frontend(context, backend,config=cfg)
