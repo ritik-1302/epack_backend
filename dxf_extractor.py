@@ -152,15 +152,15 @@ class DXFExtractor:
                        
         
         
-# if __name__=="__main__":    
+if __name__=="__main__":    
 
-#        import json
-#        import ezdxf
-#        doc=ezdxf.readfile('/home/ritikshah/Downloads/advance(1).dxf')
-#        extractor=DXFExtractor(doc,3)
-#     #    print(extractor.extract_parts_from_block(300,300))
-#        with open('data.json', 'w') as outfile:
-#            json.dump(extractor.extract_parts_from_block(300, 300), outfile)
+       import json
+       import ezdxf
+       doc=ezdxf.readfile('/Users/kalyan/Documents/GitHub/epack/advance.dxf')
+       extractor=DXFExtractor(doc,3)
+    #    print(extractor.extract_parts_from_block(300,300))
+       with open('data.json', 'w') as outfile:
+           json.dump(extractor.extract_parts_from_block(300, 300), outfile)
     
 
 
