@@ -108,7 +108,7 @@ class ExcelGenerator:
             sheet.append(["",item_type.upper(),"",block_name,"",phase_qty,total_w,phase_qty*total_w,total_sa,total_sa*phase_qty])
             sheet.append(["","","","","","","","","","","PART MARK","PART DESCRIPTION",	"LENGTH","WIDTH",	"THK.", "QTY.",	"QTY./BLDG.",	"YIELD",	"WEIGHT",	"SURFACE AREA (M2)"])
             for parts_dict in block_details['parts']:
-                sheet.append(["","","","","","","","","","",parts_dict["Part Name"],"",parts_dict['Length (mm)'],parts_dict["Width (mm)"],parts_dict["Thickness (mm)"],parts_dict["Quantity"],int(parts_dict["Quantity"])*phase_qty,"",parts_dict["Weight (kg)"],parts_dict["Area (m2)"]])
+                sheet.append(["","","","","","","","","","",parts_dict["Part Name"],"",parts_dict['Length (mm)'],parts_dict["Width (mm)"],parts_dict["Thickness (mm)"],parts_dict["Quantity"],int(parts_dict["Quantity"])*phase_qty,int("345"),parts_dict["Weight (kg)"],parts_dict["Area (m2)"]])
         
         
         return wb
