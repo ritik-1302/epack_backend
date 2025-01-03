@@ -13,8 +13,8 @@ class ImageGenerator:
              for entity in block:
                 if entity.dxftype() == 'MTEXT' and  not re.match(phase_regex_pattern,entity.dxf.text):
                     entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
-                    entity.dxf.char_height*=1.5
-                    entity.dxf.char_height*=1.4        
+                    entity.dxf.width*=5
+                    entity.dxf.char_height*=1.4
             
     def generate_image_of_block(self,block_name,width,height):
         block = self.doc.blocks.get(block_name)
@@ -38,10 +38,14 @@ class ImageGenerator:
     
         return svg_string
 
-# if __name__=='__main__':
-#    doc=ezdxf.readfile('/home/ritikshah/Downloads/ADVANCE SOFTWEAR DRAWING.dxf')
-#    ig=ImageGenerator(doc)
-#    print(ig.generate_image_of_block('mark_SC1_01',300 ,300))
+if __name__=='__main__':
+   doc=ezdxf.readfile('/Users/kalyan/Documents/GitHub/epack/naya.dxf')
+   ig=ImageGenerator(doc)
+   with open('ok_file.svg','w') as f:
+        # f.write(ig.generate_image_of_block('mark_SC1A_00',3508 ,2480))
+        f.write(ig.generate_image_of_block('mark_SC1A_00',3508 ,2480))
+
+#    print(ig.generate_image_of_block('mark_SC1A_00',300 ,300))
  
                 
             
