@@ -50,7 +50,7 @@ def allowed_file(filename):
 #Test Route
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello, World! This is the DXF API'
 
 @app.route('/get_dxf_info', methods=['POST'])
 def get_dxf_info():
