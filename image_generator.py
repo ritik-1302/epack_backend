@@ -39,11 +39,11 @@ class ImageGenerator:
         return svg_string
 
 if __name__=='__main__':
-   doc=ezdxf.readfile('/Users/kalyan/Documents/GitHub/epack/naya.dxf')
+   doc=ezdxf.readfile('/Users/kalyan/Documents/GitHub/epack/advance.dxf')
    ig=ImageGenerator(doc)
    with open('ok_file.svg','w') as f:
         # f.write(ig.generate_image_of_block('mark_SC1A_00',3508 ,2480))
-        f.write(ig.generate_image_of_block('mark_SC1A_00',3508 ,2480))
+        f.write(ig.generate_image_of_block('mark_SC1_01',3508 ,2480))
 
 #    print(ig.generate_image_of_block('mark_SC1A_00',300 ,300))
  
