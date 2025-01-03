@@ -13,8 +13,8 @@ class ImageGenerator:
              for entity in block:
                 if entity.dxftype() == 'MTEXT' and  not re.match(phase_regex_pattern,entity.dxf.text):
                     entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
-                    entity.dxf.width*= 5        
-                    entity.dxf.char_height*=1.4
+                    entity.dxf.char_height*=1.5
+                    entity.dxf.char_height*=1.4        
             
     def generate_image_of_block(self,block_name,width,height):
         block = self.doc.blocks.get(block_name)
@@ -23,7 +23,8 @@ class ImageGenerator:
             context = RenderContext(doc=self.doc)
             backend = svg.SVGBackend()
             cfg=config.Configuration(
-                lineweight_scaling=3,            
+                lineweight_scaling=5,
+            
             )
         
             frontend = Frontend(context, backend,config=cfg)
