@@ -113,8 +113,9 @@ def get_dxf_info():
         try:
             # Read the DXF file
             doc = ezdxf.readfile(filepath)
+            img_doc=ezdxf.readfile(filepath)
             logger.info("File read Sucessfully")
-            extractor=DXFExtractor(doc=doc,density=density)
+            extractor=DXFExtractor(doc=doc,img_doc=img_doc,density=density)
             result_data=extractor.extract_parts_from_block(image_width=width,image_height=height)
             s3_util=S3Utils()
             try:

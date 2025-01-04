@@ -8,21 +8,26 @@ class ImageGenerator:
     def __init__(self,doc) -> None:
         self.doc=doc
         self.logger=logging.getLogger(self.__class__.__name__)
-        phase_regex_pattern=r"~PHASE_\d+/\d+"
-        for block in doc.blocks:
-             for entity in block:
-                if entity.dxftype() == 'MTEXT' and  not re.match(phase_regex_pattern,entity.dxf.text):
-                    entity.dxf.char_height*=1.4        
+        self.phase_regex_pattern=r"~PHASE_\d+/\d+"
+     
+                        
             
     def generate_image_of_block(self,block_name,width,height):
         block = self.doc.blocks.get(block_name)
         if block.name.startswith('mark_'):
+            #Editing Image
+            for entity in block:
+                if entity.dxftype() == 'MTEXT' and  not re.match(self.phase_regex_pattern,entity.dxf.text):
+                    entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
+                    entity.dxf.width*=5
+                    entity.dxf.char_height*=1.3
+                    
+            
             self.logger.info("Image string generation started")
             context = RenderContext(doc=self.doc)
             backend = svg.SVGBackend()
             cfg=config.Configuration(
-                lineweight_scaling=5,
-            
+                lineweight_scaling=4,
             )
         
             frontend = Frontend(context, backend,config=cfg)
@@ -36,7 +41,13 @@ class ImageGenerator:
     
         return svg_string
 
-# if __name__=='__main__':
-#    doc=ezdxf.readfile('/home/ritikshah/Downloads/ADVANCE SOFTWEAR DRAWING.dxf')
-#    ig=ImageGenerator(doc)
-#    print(ig.generate_image_of_block('mark_SC1_01',300 ,300))
+if __name__=='__main__':
+   doc=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4643.dxf')
+   ig=ImageGenerator(doc)
+   for block in doc.blocks:
+       if block.name.startswith('mark_'):
+           with open (f'{block.name}.svg', 'w') as f:
+               f.write(ig.generate_image_of_block(block.name, 1920, 1080))
+               print(f"Image of {block.name} generated successfully")
+
+#    print(ig.generate_image_of_block('mark_SC1_01',300 ,300)

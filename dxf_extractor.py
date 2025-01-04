@@ -7,7 +7,7 @@ import math
 import re
 import math
 class DXFExtractor:
-    def __init__(self,doc,density) -> None:
+    def __init__(self,doc,density,img_doc) -> None:
         self.parts_regex_pattern = r"\\A1;\d+X\d+X\d+ \w+(\~\d+)?"
         self.phase_regex_pattern=r"~PHASE_\d+/\d+"
         self.pipe_regex_MTEXT_pattern=r'\\A\d+;\d+ PB\d~{\\A\d+;\\C\d+;\d+NB \(M\)PIPE}'
@@ -15,13 +15,14 @@ class DXFExtractor:
         self.doc=doc
         self.density=density
         self.logger=logging.getLogger(self.__class__.__name__)
+        self.img_doc=img_doc
 
 
     def extract_parts_from_block(self,image_width,image_height):
         self.logger.info("Extracting parts from block")
         inventory_list = InventoryHandler().get_inventory_list()
         block_wise_parts_dict={}
-        ig=ImageGenerator(self.doc)
+        ig=ImageGenerator(self.img_doc)
         duplicate_check_dict={}
         for block in self.doc.blocks:
             if block.name.startswith('mark_'):
@@ -152,13 +153,12 @@ class DXFExtractor:
                        
         
         
-# if __name__=="__main__":    
+if __name__=="__main__":    
 
-#        import json
-#        import ezdxf
-#        doc=ezdxf.readfile('/home/ritikshah/Downloads/advance(1).dxf')
-#        extractor=DXFExtractor(doc,3)
-#     #    print(extractor.extract_parts_from_block(300,300))
-#        with open('data.json', 'w') as outfile:
-#            json.dump(extractor.extract_parts_from_block(300, 300), outfile)
+       import json
+       import ezdxf
+       doc=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4643.dxf')
+       extractor=DXFExtractor(doc,3)
+       with open('data.json', 'w') as outfile:
+           json.dump(extractor.extract_parts_from_block(300, 300), outfile)
     
