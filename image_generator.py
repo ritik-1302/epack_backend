@@ -19,7 +19,7 @@ class ImageGenerator:
             for entity in block:
                 if entity.dxftype() == 'MTEXT' and  not re.match(self.phase_regex_pattern,entity.dxf.text):
                     entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
-                    entity.dxf.width*=5
+                    entity.dxf.width*=10
                     entity.dxf.char_height*=1.3
                     
             
