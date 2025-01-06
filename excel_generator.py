@@ -85,7 +85,7 @@ class ExcelGenerator:
                 
             for parts_dict in block_details['parts']:
                 total_sa=total_sa+parts_dict["Area (m2)"]
-                total_w=total_w+parts_dict["Weight (kg)"]
+                total_w=total_w+(parts_dict["Weight (kg)"]*phase_qty*int(parts_dict["Quantity"]))
             
             item_type="UNKNOWN"
             
@@ -109,7 +109,7 @@ class ExcelGenerator:
             sheet.append(["","","","","","","","","","","PART MARK","PART DESCRIPTION",	"LENGTH","WIDTH",	"THK.", "QTY.",	"QTY./BLDG.",	"YIELD",	"WEIGHT",	"SURFACE AREA (M2)"])
             for parts_dict in block_details['parts']:
                 yeild="240" if "PIPE" in parts_dict["Part Name"] else "345"
-                sheet.append(["","","","","","","","","","",parts_dict["Part Name"],"",parts_dict['Length (mm)'],parts_dict["Width (mm)"],parts_dict["Thickness (mm)"],parts_dict["Quantity"],int(parts_dict["Quantity"])*phase_qty,yeild,parts_dict["Weight (kg)"],parts_dict["Area (m2)"]])
+                sheet.append(["","","","","","","","","","",parts_dict["Part Name"],"",parts_dict['Length (mm)'],parts_dict["Width (mm)"],parts_dict["Thickness (mm)"],parts_dict["Quantity"],int(parts_dict["Quantity"])*phase_qty,yeild,parts_dict["Weight (kg)"]*phase_qty*int(parts_dict["Quantity"]),parts_dict["Area (m2)"]])
         
         
         return wb
