@@ -31,40 +31,82 @@ class DXFExtractor:
                 for entity in block:
                     if entity.dxftype()=="DIMENSION":
                         for virtual_entity in entity.virtual_entities():
-                            if virtual_entity.dxftype() == "MTEXT" and re.match(self.parts_regex_pattern,virtual_entity.dxf.text) :
-                                try:
-                                    part_str=virtual_entity.dxf.text[4:]
-                                    dimention,name=part_str.split(" ")
-                                    length, width, thickness = dimention.split("X")
-                                    length = int(length)
-                                    width = int( width)
-                                    thickness = int(thickness)
-                                    area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
-                                    volume = length * width * thickness / 1000000000  
-                                    weight = volume * float(self.density)
-                                    
-                                    
-                                    if '~' in name:
-                                        part_name,qty=name.split('~')
-                                    else:
-                                        qty=1
-                                        part_name=name
+                            if virtual_entity.dxftype() == "MTEXT" and re.match(self.parts_regex_pattern,virtual_entity.dxf.text):
+                                if "-"  in virtual_entity.dxf.text and "WP" in virtual_entity.dxf.text:
+                                    try:
+                                        part_str=virtual_entity.dxf.text[4:]
+                                        dimention,name=part_str.split(" ")
+                                        length, _, thickness = dimention.split("X")
+                                        width_range=name.split('(')[1].split(')')[0].split('-')
+                                        width=(int(width_range[0])+int(width_range[1]))/2
+                                        length = int(length)
+                                        thickness = int(thickness)
+                                        area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
+                                        volume = length * width * thickness / 1000000000  
+                                        weight = volume * float(self.density)
                                         
-                                    if part_name not in duplicate_check_dict[block.name]:
-                                        block_wise_parts_dict[block.name]['parts'].append({
-                                        "Part Name": part_name.upper(),
-                                        "Thickness (mm)": int(thickness),
-                                        "Quantity": int(qty),
-                                        "Length (mm)": int(length),
-                                        "Width (mm)": int(width),
-                                        "Area (m2)": round(area,2) if round(area,2)!=0 else area,
-                                        "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
-                                        "Weight (kg)": round(weight,2) if round(weight, 2) else weight
-                                        })
-                                        duplicate_check_dict[block.name][part_name]=True
                                         
-                                except Exception as e:
-                                    self.logger.error(f"Error  {e}")
+                                        if '~' in name:
+                                            part_name,qty=name.split('~')
+                                        else:
+                                            qty=1
+                                            part_name=name
+                                            
+                                        if part_name not in duplicate_check_dict[block.name]:
+                                            block_wise_parts_dict[block.name]['parts'].append({
+                                            "Part Name": part_name.upper(),
+                                            "Thickness (mm)": int(thickness),
+                                            "Quantity": int(qty),
+                                            "Length (mm)": int(length),
+                                            "Width (mm)": int(width),
+                                            "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                            "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
+                                            "Weight (kg)": round(weight,2) if round(weight, 2) else weight
+                                            })
+                                            duplicate_check_dict[block.name][part_name]=True
+                                        
+                                       
+
+                                    except Exception as e:
+                                        self.logger.error(f"Error  {e}")
+                                    
+                                
+                                else:
+                              
+                                    try:
+                                        part_str=virtual_entity.dxf.text[4:]
+                                        dimention,name=part_str.split(" ")
+                                        length, width, thickness = dimention.split("X")
+                                        length = int(length)
+                                        width = int( width)
+                                        thickness = int(thickness)
+                                        area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
+                                        volume = length * width * thickness / 1000000000  
+                                        weight = volume * float(self.density)
+                                        
+                                        
+                                        if '~' in name:
+                                            part_name,qty=name.split('~')
+                                        else:
+                                            qty=1
+                                            part_name=name
+                                            
+                                        if part_name not in duplicate_check_dict[block.name]:
+                                            block_wise_parts_dict[block.name]['parts'].append({
+                                            "Part Name": part_name.upper(),
+                                            "Thickness (mm)": int(thickness),
+                                            "Quantity": int(qty),
+                                            "Length (mm)": int(length),
+                                            "Width (mm)": int(width),
+                                            "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                            "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
+                                            "Weight (kg)": round(weight,2) if round(weight, 2) else weight
+                                            })
+                                            duplicate_check_dict[block.name][part_name]=True
+                                            
+                                    except Exception as e:
+                                        self.logger.error(f"Error  {e}")
+                                        
                             elif virtual_entity.dxftype()=="MTEXT" and re.match(self.pipe_regex_MTEXT_pattern,virtual_entity.dxf.text):
                                 
                                 try:
@@ -104,40 +146,80 @@ class DXFExtractor:
                            self.logger.error(f"Error  {e}")
                             
                     elif entity.dxftype() == "MTEXT" and re.match(self.parts_regex_pattern[5:],entity.dxf.text):
-                        try:
-                            part_str=entity.dxf.text.strip()
-                            dimention,name=part_str.split(" ")
-                            length, width, thickness = dimention.split("X")
-                            length = int(length)
-                            width = int( width)
-                            thickness = int(thickness)
-                            area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
-                            volume = length * width * thickness / 1000000000  
-                            weight = volume * float(self.density)
+                        if "-"  in entity.dxf.text and "WP" in entity.dxf.text:
+                            try:
+                                        part_str=entity.dxf.text.strip()
+                                        dimention,name=part_str.split(" ")
+                                        length, _, thickness = dimention.split("X")
+                                        width_range=name.split('(')[1].split(')')[0].split('-')
+                                        width=(int(width_range[0])+int(width_range[1]))/2
+                                        length = int(length)
+                                        thickness = int(thickness)
+                                        area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
+                                        volume = length * width * thickness / 1000000000  
+                                        weight = volume * float(self.density)
+                                        
+                                        
+                                        if '~' in name:
+                                            part_name,qty=name.split('~')
+                                        else:
+                                            qty=1
+                                            part_name=name
+                                            
+                                        if part_name not in duplicate_check_dict[block.name]:
+                                            block_wise_parts_dict[block.name]['parts'].append({
+                                            "Part Name": part_name.upper(),
+                                            "Thickness (mm)": int(thickness),
+                                            "Quantity": int(qty),
+                                            "Length (mm)": int(length),
+                                            "Width (mm)": int(width),
+                                            "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                            "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
+                                            "Weight (kg)": round(weight,2) if round(weight, 2) else weight
+                                            })
+                                            duplicate_check_dict[block.name][part_name]=True
+                                        
+                                       
+
+                            except Exception as e:
+                                self.logger.error(f"Error  {e}")
                             
                             
-                            if '~' in name:
-                                part_name,qty=name.split('~')
-                            else:
-                                qty=1
-                                part_name=name
+                        else:
+                            try:
+                                part_str=entity.dxf.text.strip()
+                                dimention,name=part_str.split(" ")
+                                length, width, thickness = dimention.split("X")
+                                length = int(length)
+                                width = int( width)
+                                thickness = int(thickness)
+                                area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
+                                volume = length * width * thickness / 1000000000  
+                                weight = volume * float(self.density)
                                 
-                            
-                            if part_name not in duplicate_check_dict[block.name]:
-                                block_wise_parts_dict[block.name]['parts'].append({
-                                "Part Name": part_name.upper(),
-                                "Thickness (mm)": int(thickness),
-                                "Quantity": int(qty),
-                                "Length (mm)": int(length),
-                                "Width (mm)": int(width),
-                                "Area (m2)": round(area,2) if round(area,2)!=0 else area,
-                                "Volume (m3)": round(volume,2) if round(volume,2)!=0 else volume ,
-                                "Weight (kg)": round(weight,2) if round(weight,2)!=0 else weight
-                                })
-                                duplicate_check_dict[block.name][part_name]=True
-                            
-                        except Exception as e:
-                            self.logger.error(f"Error  {e}")
+                                
+                                if '~' in name:
+                                    part_name,qty=name.split('~')
+                                else:
+                                    qty=1
+                                    part_name=name
+                                    
+                                
+                                if part_name not in duplicate_check_dict[block.name]:
+                                    block_wise_parts_dict[block.name]['parts'].append({
+                                    "Part Name": part_name.upper(),
+                                    "Thickness (mm)": int(thickness),
+                                    "Quantity": int(qty),
+                                    "Length (mm)": int(length),
+                                    "Width (mm)": int(width),
+                                    "Area (m2)": round(area,2) if round(area,2)!=0 else area,
+                                    "Volume (m3)": round(volume,2) if round(volume,2)!=0 else volume ,
+                                    "Weight (kg)": round(weight,2) if round(weight,2)!=0 else weight
+                                    })
+                                    duplicate_check_dict[block.name][part_name]=True
+                                
+                            except Exception as e:
+                                self.logger.error(f"Error  {e}")
         
                         
         self.logger.info("Sucessfully generated blockwise parts dict")
@@ -157,8 +239,9 @@ if __name__=="__main__":
 
        import json
        import ezdxf
-       doc=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4643.dxf')
-       extractor=DXFExtractor(doc,3)
+       doc=ezdxf.readfile('/home/ritikshah/Downloads/WP1A.dxf')
+       doc2=ezdxf.readfile('/home/ritikshah/Downloads/WP1A.dxf')
+       extractor=DXFExtractor(doc,3,doc2)
        with open('data.json', 'w') as outfile:
            json.dump(extractor.extract_parts_from_block(300, 300), outfile)
     
