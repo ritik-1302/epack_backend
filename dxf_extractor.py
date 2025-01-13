@@ -144,7 +144,44 @@ class DXFExtractor:
                                 except Exception as e :
                                     self.logger.error(f"Error  {e}")
                                 
-                            
+                            elif virtual_entity.dxftype()=="MTEXT" and re.match(self.inventory_item_regex,virtual_entity.plain_text()):
+                                try:
+                                    part_str=virtual_entity.plain_text().strip()
+                                    length,name=part_str.split(" ")
+                                    part_mark,inventory_item=name.split("_")
+                                    if '~' in inventory_item:
+                                        inventory_part_name,qty=inventory_item.split('~')
+                                    else :
+                                        qty=1
+                                        inventory_part_name=inventory_item
+                                    
+                                    inventory_part_details=next( (item for item in inventory_list if item["itemDescription"] == inventory_part_name), None)
+                                    if inventory_part_details is None:
+                                        self.logger.error(f"Error  No such inventory item exists")
+                                        continue
+                                    
+                                    weight=int(inventory_part_details["weightPerMeter"])*int( length)/1000
+                                    
+                                    if part_mark not in duplicate_check_dict[block.name]:
+                                        block_wise_parts_dict[block.name]['parts'].append({
+                                            "Part Name":part_mark.upper(),
+                                            "Thickness (mm)": int(inventory_part_details["thickness"]),
+                                            "Quantity": int(qty),
+                                            "Length (mm)": int(length),
+                                            "Width (mm)":0,
+                                            "Area (m2)":0,
+                                            "Volume (m3)":0,
+                                            "Weight (kg)": round(weight, 2) if round(weight, 2)!=0 else weight
+                                        })
+                                        duplicate_check_dict[block.name][part_mark]=True
+                                    
+                                        
+                                    
+                                except Exception as e :
+                                    self.logger.error(f"Error  {e}")
+
+                                
+                                
                                         
                             # elif virtual_entity.dxftype()=="MTEXT" and re.match(self.pipe_regex_MTEXT_pattern,virtual_entity.dxf.text):
                                 
@@ -258,7 +295,7 @@ class DXFExtractor:
                                     duplicate_check_dict[block.name][part_name]=True
                                 
                             except Exception as e:
-                                self.logger.error(f"Error  {e}")
+                                self.logger.error(f"Error  {e}")                         
         
                         
         self.logger.info("Sucessfully generated blockwise parts dict")
@@ -278,8 +315,8 @@ if __name__=="__main__":
 
        import json
        import ezdxf
-       doc=ezdxf.readfile('/home/ritikshah/Downloads/WP1A.dxf')
-       doc2=ezdxf.readfile('/home/ritikshah/Downloads/WP1A.dxf')
+       doc=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4801 Advance Softwear(2).dxf')
+       doc2=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4801 Advance Softwear(2).dxf')
        extractor=DXFExtractor(doc,3,doc2)
        with open('data.json', 'w') as outfile:
            json.dump(extractor.extract_parts_from_block(300, 300), outfile)

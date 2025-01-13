@@ -92,9 +92,7 @@ class ExcelGenerator:
             for key,value in self.item_type_dict.items():
                 try:
                     item_name=block_name.split("_")[1];
-                    print(item_name)
                     item_name=''.join(i for i in item_name if i.isdigit()==False)
-                    print(item_name)
                     if key.lower() == item_name.lower():
                         item_type=value
                         break
@@ -108,7 +106,7 @@ class ExcelGenerator:
             sheet.append(["",item_type.upper(),"",block_name,"",phase_qty,total_w,phase_qty*total_w,total_sa,total_sa*phase_qty])
             sheet.append(["","","","","","","","","","","PART MARK","PART DESCRIPTION",	"LENGTH","WIDTH",	"THK.", "QTY.",	"QTY./BLDG.",	"YIELD",	"WEIGHT",	"SURFACE AREA (M2)"])
             for parts_dict in block_details['parts']:
-                yeild="240" if int(parts_dict["Width (mm)"])==0 in parts_dict["Part Name"] else "345"
+                yeild="240" if int(parts_dict["Width (mm)"])==0  else "345"
                 sheet.append(["","","","","","","","","","",parts_dict["Part Name"],"",parts_dict['Length (mm)'],parts_dict["Width (mm)"],parts_dict["Thickness (mm)"],parts_dict["Quantity"],int(parts_dict["Quantity"])*phase_qty,yeild,parts_dict["Weight (kg)"]*phase_qty*int(parts_dict["Quantity"]),parts_dict["Area (m2)"]])
         
         
