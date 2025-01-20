@@ -9,19 +9,36 @@ class ImageGenerator:
         self.doc=doc
         self.logger=logging.getLogger(self.__class__.__name__)
         self.phase_regex_pattern=r"~PHASE_\d+/\d+"
-     
-                        
-            
+        
+        for block in doc.blocks:
+            for entity in block:
+                if entity.dxftype() == 'MTEXT' and  not re.match(self.phase_regex_pattern, entity.dxf.text):
+                    entity.dxf.width*=0
+                    entity.dxf.char_height*=1.3
+                    entity.dxf.text = entity.plain_text(fast=False).strip().replace("\n","")
+                    entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
+                    
+                    
+                         
     def generate_image_of_block(self,block_name,width,height):
         block = self.doc.blocks.get(block_name)
         if block.name.startswith('mark_'):
+            # for entity in block:
+            #     if entity.dxftype() == 'MTEXT' :
+            #           print(entity.dxf.text)
             #Editing Image
-            for entity in block:
-                if entity.dxftype() == 'MTEXT' and  not re.match(self.phase_regex_pattern,entity.dxf.text):
-                    entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
-                    entity.dxf.width*=10
-                    entity.dxf.char_height*=1.3
-                    
+            # for entity in block:
+            #     if entity.dxftype() == 'MTEXT' and  not re.match(self.phase_regex_pattern,entity.dxf.text):
+            #         entity.dxf.text = entity.dxf.text.replace(" ", "\u00A0")
+            #         entity.dxf.width=0
+            #         entity.dxf.char_height*=1.3
+            #     elif entity.dxftype() == 'DIMENSION':
+            #         for virtual_entity in entity.virtual_entities():
+            #             if virtual_entity.dxftype() == 'MTEXT' and not re.match(self.phase_regex_pattern, virtual_entity.dxf.text):
+            #                 virtual_entity.dxf.text = virtual_entity.plain_text(fast=False)
+            #                 virtual_entity.dxf.text = virtual_entity.dxf.text.replace(" ", "\u00A0")
+            #                 virtual_entity.dxf.width=0
+            #                 virtual_entity.dxf.char_height*=1.3
             
             self.logger.info("Image string generation started")
             context = RenderContext(doc=self.doc)
@@ -42,7 +59,7 @@ class ImageGenerator:
         return svg_string
 
 if __name__=='__main__':
-   doc=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4643.dxf')
+   doc=ezdxf.readfile('/home/ritikshah/Downloads/RAWAT.dxf')
    ig=ImageGenerator(doc)
    for block in doc.blocks:
        if block.name.startswith('mark_'):
