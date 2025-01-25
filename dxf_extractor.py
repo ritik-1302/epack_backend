@@ -160,12 +160,12 @@ class DXFExtractor:
                                         self.logger.error(f"Error  No such inventory item exists")
                                         continue
                                     
-                                    weight=int(inventory_part_details["weightPerMeter"])*int( length)/1000
+                                    weight=float(inventory_part_details["weightPerMeter"])*float( length)/1000
                                     
                                     if part_mark not in duplicate_check_dict[block.name]:
                                         block_wise_parts_dict[block.name]['parts'].append({
                                             "Part Name":part_mark.upper(),
-                                            "Thickness (mm)": int(inventory_part_details["thickness"]),
+                                            "Thickness (mm)": float(inventory_part_details["thickness"]),
                                             "Quantity": int(qty),
                                             "Length (mm)": int(length),
                                             "Width (mm)":0,
@@ -304,19 +304,14 @@ class DXFExtractor:
                 
         
 
-                            
-                            
-
                         
-                       
-        
         
 if __name__=="__main__":    
 
        import json
        import ezdxf
-       doc=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4801 Advance Softwear(2).dxf')
-       doc2=ezdxf.readfile('/home/ritikshah/Downloads/J-24-4801 Advance Softwear(2).dxf')
+       doc=ezdxf.readfile('/home/ritikshah/Downloads/123.dxf')
+       doc2=ezdxf.readfile('/home/ritikshah/Downloads/123.dxf')
        extractor=DXFExtractor(doc,3,doc2)
        with open('data.json', 'w') as outfile:
            json.dump(extractor.extract_parts_from_block(300, 300), outfile)
