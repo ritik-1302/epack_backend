@@ -39,9 +39,9 @@ class DXFExtractor:
                                         dimention,name=part_str.split(" ")
                                         length, _, thickness = dimention.split("X")
                                         width_range=name.split('(')[1].split(')')[0].split('-')
-                                        width=(int(width_range[0])+int(width_range[1]))/2
-                                        length = int(length)
-                                        thickness = int(thickness)
+                                        width=(float(width_range[0])+float(width_range[1]))/2
+                                        length = float(length)
+                                        thickness = float(thickness)
                                         area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
                                         volume = length * width * thickness / 1000000000  
                                         weight = volume * float(self.density)
@@ -56,10 +56,10 @@ class DXFExtractor:
                                         if part_name not in duplicate_check_dict[block.name]:
                                             block_wise_parts_dict[block.name]['parts'].append({
                                             "Part Name": part_name.upper(),
-                                            "Thickness (mm)": int(thickness),
-                                            "Quantity": int(qty),
-                                            "Length (mm)": int(length),
-                                            "Width (mm)": int(width),
+                                            "Thickness (mm)": float(thickness),
+                                            "Quantity": float(qty),
+                                            "Length (mm)": float(length),
+                                            "Width (mm)": max(float(width_range[1]),float(width_range[0])),
                                             "Area (m2)": round(area,2) if round(area,2)!=0 else area,
                                             "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
                                             "Weight (kg)": round(weight,2) if round(weight, 2) else weight
@@ -78,9 +78,9 @@ class DXFExtractor:
                                         part_str=virtual_entity.dxf.text[4:]
                                         dimention,name=part_str.split(" ")
                                         length, width, thickness = dimention.split("X")
-                                        length = int(length)
-                                        width = int( width)
-                                        thickness = int(thickness)
+                                        length = float(length)
+                                        width = float( width)
+                                        thickness = float(thickness)
                                         area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
                                         volume = length * width * thickness / 1000000000  
                                         weight = volume * float(self.density)
@@ -95,10 +95,10 @@ class DXFExtractor:
                                         if part_name not in duplicate_check_dict[block.name]:
                                             block_wise_parts_dict[block.name]['parts'].append({
                                             "Part Name": part_name.upper(),
-                                            "Thickness (mm)": int(thickness),
-                                            "Quantity": int(qty),
-                                            "Length (mm)": int(length),
-                                            "Width (mm)": int(width),
+                                            "Thickness (mm)": float(thickness),
+                                            "Quantity": float(qty),
+                                            "Length (mm)": float(length),
+                                            "Width (mm)": float(width),
                                             "Area (m2)": round(area,2) if round(area,2)!=0 else area,
                                             "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
                                             "Weight (kg)": round(weight,2) if round(weight, 2) else weight
@@ -124,14 +124,14 @@ class DXFExtractor:
                                         self.logger.error(f"Error  No such inventory item exists")
                                         continue
                                     
-                                    weight=int(inventory_part_details["weightPerMeter"])*int( length)/1000
+                                    weight=float(inventory_part_details["weightPerMeter"])*float( length)/1000
                                     
                                     if part_mark not in duplicate_check_dict[block.name]:
                                         block_wise_parts_dict[block.name]['parts'].append({
-                                            "Part Name":part_mark.upper(),
-                                            "Thickness (mm)": int(inventory_part_details["thickness"]),
-                                            "Quantity": int(qty),
-                                            "Length (mm)": int(length),
+                                            "Part Name":part_mark.upper()+" "+inventory_part_details['itemDescription'],
+                                            "Thickness (mm)": float(inventory_part_details["thickness"]),
+                                            "Quantity": float(qty),
+                                            "Length (mm)": float(length),
                                             "Width (mm)":0,
                                             "Area (m2)":0,
                                             "Volume (m3)":0,
@@ -164,10 +164,10 @@ class DXFExtractor:
                                     
                                     if part_mark not in duplicate_check_dict[block.name]:
                                         block_wise_parts_dict[block.name]['parts'].append({
-                                            "Part Name":part_mark.upper(),
+                                            "Part Name":part_mark.upper()+" "+inventory_part_details['itemDescription'],
                                             "Thickness (mm)": float(inventory_part_details["thickness"]),
-                                            "Quantity": int(qty),
-                                            "Length (mm)": int(length),
+                                            "Quantity": float(qty),
+                                            "Length (mm)": float(length),
                                             "Width (mm)":0,
                                             "Area (m2)":0,
                                             "Volume (m3)":0,
@@ -192,17 +192,17 @@ class DXFExtractor:
                             #         pipe_name=str1.split(';')[2]
                             #         pipe_mark=pipe_name+pipename[0:3]
                             #         pipe=next((item for item in inventory_list if item["itemDescription"] == pipe_mark), None)
-                            #         area=(2*math.pi*math.pow(int(pipe["thickness"])/2,2)+math.pi*int(pipe["thickness"])*int(length))/1000000
-                            #         volume=(math.pi*math.pow(int(pipe["thickness"])/2,2)*int(length))/1000000000
-                            #         weight=int(pipe["weightPerMeter"])*int(length)/1000
+                            #         area=(2*math.pi*math.pow(float(pipe["thickness"])/2,2)+math.pi*float(pipe["thickness"])*float(length))/1000000
+                            #         volume=(math.pi*math.pow(float(pipe["thickness"])/2,2)*float(length))/1000000000
+                            #         weight=float(pipe["weightPerMeter"])*float(length)/1000
                                     
                             #         if partname not in duplicate_check_dict[block.name]:
                             #             block_wise_parts_dict[block.name]['parts'].append({
                             #             "Part Name": partname.upper()+" "+f"({pipe_mark} PIPE)",
-                            #             "Thickness (mm)": int(pipe["thickness"]),
+                            #             "Thickness (mm)": float(pipe["thickness"]),
                             #             "Quantity": 1,
-                            #             "Length (mm)": int(length),
-                            #             "Width (mm)": int(pipe["thickness"]),
+                            #             "Length (mm)": float(length),
+                            #             "Width (mm)": float(pipe["thickness"]),
                             #             "Area (m2)": round(area,2) if round(area,2)!=0 else area,
                             #             "Volume (m3)": round(volume,2) if round(volume,2)!=0 else volume,
                             #             "Weight (kg)": round(weight,2) if round(weight,2)!=0 else weight 
@@ -228,9 +228,9 @@ class DXFExtractor:
                                         dimention,name=part_str.split(" ")
                                         length, _, thickness = dimention.split("X")
                                         width_range=name.split('(')[1].split(')')[0].split('-')
-                                        width=(int(width_range[0])+int(width_range[1]))/2
-                                        length = int(length)
-                                        thickness = int(thickness)
+                                        width=(float(width_range[0])+float(width_range[1]))/2
+                                        length = float(length)
+                                        thickness = float(thickness)
                                         area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
                                         volume = length * width * thickness / 1000000000  
                                         weight = volume * float(self.density)
@@ -245,10 +245,10 @@ class DXFExtractor:
                                         if part_name not in duplicate_check_dict[block.name]:
                                             block_wise_parts_dict[block.name]['parts'].append({
                                             "Part Name": part_name.upper(),
-                                            "Thickness (mm)": int(thickness),
-                                            "Quantity": int(qty),
-                                            "Length (mm)": int(length),
-                                            "Width (mm)": int(width),
+                                            "Thickness (mm)": float(thickness),
+                                            "Quantity": float(qty),
+                                            "Length (mm)": float(length),
+                                            "Width (mm)": max(float(width_range[0],width_range[1])),
                                             "Area (m2)": round(area,2) if round(area,2)!=0 else area,
                                             "Volume (m3)": round(volume,2) if round(volume,2) else volume ,
                                             "Weight (kg)": round(weight,2) if round(weight, 2) else weight
@@ -266,9 +266,9 @@ class DXFExtractor:
                                 part_str=entity.dxf.text.strip()
                                 dimention,name=part_str.split(" ")
                                 length, width, thickness = dimention.split("X")
-                                length = int(length)
-                                width = int( width)
-                                thickness = int(thickness)
+                                length = float(length)
+                                width = float( width)
+                                thickness = float(thickness)
                                 area = ((length * width) * 2 + (length * thickness) * 2 + (width * thickness) * 2)/ 1000000  # Calculate area
                                 volume = length * width * thickness / 1000000000  
                                 weight = volume * float(self.density)
@@ -284,10 +284,10 @@ class DXFExtractor:
                                 if part_name not in duplicate_check_dict[block.name]:
                                     block_wise_parts_dict[block.name]['parts'].append({
                                     "Part Name": part_name.upper(),
-                                    "Thickness (mm)": int(thickness),
-                                    "Quantity": int(qty),
-                                    "Length (mm)": int(length),
-                                    "Width (mm)": int(width),
+                                    "Thickness (mm)": float(thickness),
+                                    "Quantity": float(qty),
+                                    "Length (mm)": float(length),
+                                    "Width (mm)": float(width),
                                     "Area (m2)": round(area,2) if round(area,2)!=0 else area,
                                     "Volume (m3)": round(volume,2) if round(volume,2)!=0 else volume ,
                                     "Weight (kg)": round(weight,2) if round(weight,2)!=0 else weight
