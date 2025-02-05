@@ -45,6 +45,9 @@ class ImageGenerator:
             backend = svg.SVGBackend()
             cfg=config.Configuration(
                 lineweight_scaling=lineweight,
+                background_policy=config.BackgroundPolicy.WHITE,
+                color_policy=config.ColorPolicy.WHITE,
+                lineweight_policy= config.LineweightPolicy.ABSOLUTE,
             )
         
             frontend = Frontend(context, backend,config=cfg)
@@ -64,7 +67,7 @@ if __name__=='__main__':
    for block in doc.blocks:
        if block.name.startswith('mark_'):
            with open (f'{block.name}.svg', 'w') as f:
-               f.write(ig.generate_image_of_block(block.name, 1920, 1080))
+               f.write(ig.generate_image_of_block(block.name, 1920, 1080,2))
                print(f"Image of {block.name} generated successfully")
 
 #    print(ig.generate_image_of_block('mark_SC1_01',300 ,300)
