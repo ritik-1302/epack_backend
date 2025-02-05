@@ -20,7 +20,7 @@ class ImageGenerator:
                     
                     
                          
-    def generate_image_of_block(self,block_name,width,height):
+    def generate_image_of_block(self,block_name,width,height,lineweight):
         block = self.doc.blocks.get(block_name)
         if block.name.startswith('mark_'):
             # for entity in block:
@@ -44,7 +44,7 @@ class ImageGenerator:
             context = RenderContext(doc=self.doc)
             backend = svg.SVGBackend()
             cfg=config.Configuration(
-                lineweight_scaling=4,
+                lineweight_scaling=lineweight,
             )
         
             frontend = Frontend(context, backend,config=cfg)

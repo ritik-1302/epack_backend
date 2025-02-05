@@ -92,6 +92,11 @@ def get_dxf_info():
     if not username:
         logger.error('No username Provided by user')
         abort(406, description='Username not provided by user')
+    
+    lineweight=request.form.get('lineweight')
+    if not lineweight:
+        logger.error('No line weight Provided by user')
+        abort(406,description='lineWeigth not provided by the user')
 
 
 
@@ -115,7 +120,7 @@ def get_dxf_info():
             doc = ezdxf.readfile(filepath)
             img_doc=ezdxf.readfile(filepath)
             logger.info("File read Sucessfully")
-            extractor=DXFExtractor(doc=doc,img_doc=img_doc,density=density)
+            extractor=DXFExtractor(doc=doc,img_doc=img_doc,density=density,lineweight=lineweight)
             result_data=extractor.extract_parts_from_block(image_width=width,image_height=height)
             s3_util=S3Utils()
             try:

@@ -7,7 +7,7 @@ import math
 import re
 import math
 class DXFExtractor:
-    def __init__(self,doc,density,img_doc) -> None:
+    def __init__(self,doc,density,img_doc,lineweight) -> None:
         self.parts_regex_pattern = r"\\A1;\d+X\d+X\d+ \w+(\~\d+)?"
         self.phase_regex_pattern=r"~PHASE_\d+/\d+"
         self.inventory_item_regex=r"^\d+ [A-Za-z0-9]+_[A-Za-z0-9()]+(~\d+)?$"
@@ -17,6 +17,7 @@ class DXFExtractor:
         self.density=density
         self.logger=logging.getLogger(self.__class__.__name__)
         self.img_doc=img_doc
+        self.lineweight=lineweight
 
 
     def extract_parts_from_block(self,image_width,image_height):
@@ -27,7 +28,7 @@ class DXFExtractor:
         duplicate_check_dict={}
         for block in self.doc.blocks:
             if block.name.startswith('mark_'):
-                block_wise_parts_dict[block.name] = {"parts": [], "phase": {}, "image_url": ig.generate_image_of_block(block_name=block.name, width=image_width, height=image_height)}
+                block_wise_parts_dict[block.name] = {"parts": [], "phase": {}, "image_url": ig.generate_image_of_block(block_name=block.name, width=image_width, height=image_height,lineweight=float(self.lineweight))}
                 duplicate_check_dict[block.name]={}
                 for entity in block:
                     if entity.dxftype()=="DIMENSION":
