@@ -9590,3 +9590,436 @@
 2024-09-22 21:55:03,326 - MongodbHandler - INFO - You are successfully connected to MongoDB!
 2024-09-22 21:55:03,538 - ProjectHandler - INFO - Recived the list of project for user ritik1302
 2024-09-22 21:55:03,539 - werkzeug - INFO - 127.0.0.1 - - [22/Sep/2024 21:55:03] "GET /get_projects?username=ritik1302 HTTP/1.1" 200 -
+2024-11-08 12:16:53,209 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-08 12:16:53,210 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-08 12:16:53,212 - werkzeug - INFO -  * Restarting with stat
+2024-11-08 12:16:54,778 - werkzeug - WARNING -  * Debugger is active!
+2024-11-08 12:16:54,784 - werkzeug - INFO -  * Debugger PIN: 137-011-654
+2024-11-08 12:18:29,069 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:18:29] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-08 12:18:29,740 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:18:30,080 - UserHandler - INFO - Password matched
+2024-11-08 12:18:30,081 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:18:30] "POST /login HTTP/1.1" 200 -
+2024-11-08 12:18:31,400 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:18:31,429 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 12:18:31,431 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:18:31] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 12:18:31,962 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:18:31,962 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:18:31,988 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:18:32,004 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:18:32] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 12:18:32,019 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 12:18:32,020 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:18:32] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 12:18:32,888 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:18:32,889 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:18:32,918 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:18:32] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 12:18:40,452 - root - INFO - DXF File Detected
+2024-11-08 12:18:40,458 - root - INFO - DXF File path files\abc.dxf
+2024-11-08 12:18:41,296 - main - INFO - File read Sucessfully
+2024-11-08 12:18:41,901 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:18:41,902 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:18:41,972 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:18:42,617 - fontTools.ttLib.tables._h_e_a_d - WARNING - 'created' timestamp out of range; ignoring top bytes
+2024-11-08 12:18:42,618 - fontTools.ttLib.tables._h_e_a_d - WARNING - 'modified' timestamp out of range; ignoring top bytes
+2024-11-08 12:18:43,488 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:18:43,493 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:18:44,027 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:18:44,032 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:18:44,626 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:18:44,631 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:18:44,786 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:18:44,790 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:18:45,341 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:18:45,351 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 12:18:46,091 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:19:01,951 - S3Utils - INFO - File ritik-test/74800a48592563c264ea1482a5cdb695 uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 12:19:02,023 - S3Utils - INFO - File ritik-test/74800a48592563c264ea1482a5cdb695 metaData uploaded successfully to MongoDB
+2024-11-08 12:19:02,025 - main - INFO - Removed file from files\abc.dxf
+2024-11-08 12:19:02,031 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:19:02] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 12:19:06,394 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:19:26,482 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:19:31,223 - S3Utils - INFO - Sucessfully downloaded file ritik-test/74800a48592563c264ea1482a5cdb695 from epack-test1302 s3 bucket 
+2024-11-08 12:19:31,246 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:19:31] "GET /get_parts_info?filename=ritik-test/74800a48592563c264ea1482a5cdb695 HTTP/1.1" 200 -
+2024-11-08 12:19:50,174 - S3Utils - INFO - Sucessfully downloaded file ritik-test/74800a48592563c264ea1482a5cdb695 from epack-test1302 s3 bucket 
+2024-11-08 12:19:50,197 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:19:50] "GET /get_parts_info?filename=ritik-test/74800a48592563c264ea1482a5cdb695 HTTP/1.1" 200 -
+2024-11-08 12:20:44,662 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:20:44,692 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 12:20:44,693 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:20:44] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 12:20:45,177 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:20:45,178 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:20:45,195 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:20:45,208 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:20:45] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 12:20:45,226 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 12:20:45,227 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:20:45] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 12:20:45,853 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:20:45,854 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:20:45,891 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:20:45] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 12:22:14,902 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-08 12:22:14,903 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-08 12:22:14,905 - werkzeug - INFO -  * Restarting with stat
+2024-11-08 12:22:16,524 - werkzeug - WARNING -  * Debugger is active!
+2024-11-08 12:22:16,530 - werkzeug - INFO -  * Debugger PIN: 137-011-654
+2024-11-08 12:22:31,257 - root - INFO - DXF File Detected
+2024-11-08 12:22:31,265 - root - INFO - DXF File path files\abc.dxf
+2024-11-08 12:22:32,151 - main - INFO - File read Sucessfully
+2024-11-08 12:22:32,151 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 12:22:32,721 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:22:32,721 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:22:32,772 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:22:33,451 - fontTools.ttLib.tables._h_e_a_d - WARNING - 'created' timestamp out of range; ignoring top bytes
+2024-11-08 12:22:33,452 - fontTools.ttLib.tables._h_e_a_d - WARNING - 'modified' timestamp out of range; ignoring top bytes
+2024-11-08 12:22:34,425 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:22:34,447 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:22:35,034 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:22:35,051 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:22:35,611 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:22:35,636 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:22:35,774 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:22:35,785 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:22:36,329 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:22:36,338 - DXFExtractor - ERROR - Error  too many values to unpack (expected 2)
+2024-11-08 12:22:36,339 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 12:22:37,038 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:22:51,710 - S3Utils - INFO - File ritik-test/8c4b25998e905a628b979627c8d2fe60 uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 12:22:51,796 - S3Utils - INFO - File ritik-test/8c4b25998e905a628b979627c8d2fe60 metaData uploaded successfully to MongoDB
+2024-11-08 12:22:51,798 - main - INFO - Removed file from files\abc.dxf
+2024-11-08 12:22:51,805 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:22:51] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 12:22:52,918 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:22:55,449 - S3Utils - INFO - Sucessfully downloaded file ritik-test/8c4b25998e905a628b979627c8d2fe60 from epack-test1302 s3 bucket 
+2024-11-08 12:22:55,476 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:22:55] "GET /get_parts_info?filename=ritik-test/8c4b25998e905a628b979627c8d2fe60 HTTP/1.1" 200 -
+2024-11-08 12:22:56,261 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:22:58,641 - S3Utils - INFO - Sucessfully downloaded file ritik-test/8c4b25998e905a628b979627c8d2fe60 from epack-test1302 s3 bucket 
+2024-11-08 12:22:58,672 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:22:58] "GET /get_parts_info?filename=ritik-test/8c4b25998e905a628b979627c8d2fe60 HTTP/1.1" 200 -
+2024-11-08 12:37:04,738 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:04,764 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 12:37:04,766 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:37:04] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 12:37:05,239 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:05,242 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:05,243 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:37:05,270 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 12:37:05,271 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:37:05] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 12:37:05,273 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:37:05] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 12:37:05,714 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:05,714 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:37:05,746 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:37:05] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 12:37:18,966 - root - INFO - DXF File Detected
+2024-11-08 12:37:18,972 - root - INFO - DXF File path files\advance.dxf
+2024-11-08 12:37:19,863 - main - INFO - File read Sucessfully
+2024-11-08 12:37:19,864 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 12:37:20,263 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:20,264 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 12:37:20,295 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:37:20,903 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:37:20,922 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:37:21,455 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:37:21,555 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:37:22,087 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:37:22,099 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:37:22,234 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:37:22,243 - ezdxf - INFO - relative point size is not supported
+2024-11-08 12:37:22,753 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 12:37:22,763 - DXFExtractor - ERROR - Error  too many values to unpack (expected 2)
+2024-11-08 12:37:22,764 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 12:37:23,484 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:38,102 - S3Utils - INFO - File ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 12:37:38,174 - S3Utils - INFO - File ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a metaData uploaded successfully to MongoDB
+2024-11-08 12:37:38,176 - main - INFO - Removed file from files\advance.dxf
+2024-11-08 12:37:38,181 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:37:38] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 12:37:38,951 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:37:43,262 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a from epack-test1302 s3 bucket 
+2024-11-08 12:37:43,289 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:37:43] "GET /get_parts_info?filename=ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a HTTP/1.1" 200 -
+2024-11-08 12:37:44,020 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:38:04,903 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a from epack-test1302 s3 bucket 
+2024-11-08 12:38:04,926 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:38:04] "GET /get_parts_info?filename=ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a HTTP/1.1" 200 -
+2024-11-08 12:43:58,746 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 12:44:00,991 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a from epack-test1302 s3 bucket 
+2024-11-08 12:44:01,052 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 12:44:01] "GET /download_boq?filename=ritik-test/9e1de83db5c7e9d12a3af7eb3cab147a&phase=PHASE_1 HTTP/1.1" 200 -
+2024-11-08 13:10:50,225 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:10:50,255 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 13:10:50,257 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:10:50] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 13:10:50,715 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:10:50,742 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:10:50,743 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 13:10:50,745 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 13:10:50,746 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:10:50] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 13:10:50,777 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:10:50] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 13:10:51,210 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:10:51,211 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 13:10:51,240 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:10:51] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 13:11:28,506 - root - INFO - DXF File Detected
+2024-11-08 13:11:28,511 - root - INFO - DXF File path files\abc.dxf
+2024-11-08 13:11:29,373 - main - INFO - File read Sucessfully
+2024-11-08 13:11:29,374 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 13:11:29,798 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:11:29,799 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 13:11:29,842 - ezdxf - INFO - relative point size is not supported
+2024-11-08 13:11:30,613 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 13:11:30,637 - ezdxf - INFO - relative point size is not supported
+2024-11-08 13:11:31,198 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 13:11:31,281 - ezdxf - INFO - relative point size is not supported
+2024-11-08 13:11:31,816 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 13:11:31,840 - ezdxf - INFO - relative point size is not supported
+2024-11-08 13:11:31,964 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 13:11:31,973 - ezdxf - INFO - relative point size is not supported
+2024-11-08 13:11:32,494 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 13:11:32,504 - DXFExtractor - ERROR - Error  too many values to unpack (expected 2)
+2024-11-08 13:11:32,505 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 13:11:33,190 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:11:50,877 - S3Utils - INFO - File ritik-test/67310959ed8506f8c0844f3b99df30b7 uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 13:11:50,956 - S3Utils - INFO - File ritik-test/67310959ed8506f8c0844f3b99df30b7 metaData uploaded successfully to MongoDB
+2024-11-08 13:11:50,958 - main - INFO - Removed file from files\abc.dxf
+2024-11-08 13:11:50,961 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:11:50] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 13:11:51,856 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:11:56,122 - S3Utils - INFO - Sucessfully downloaded file ritik-test/67310959ed8506f8c0844f3b99df30b7 from epack-test1302 s3 bucket 
+2024-11-08 13:11:56,146 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:11:56] "GET /get_parts_info?filename=ritik-test/67310959ed8506f8c0844f3b99df30b7 HTTP/1.1" 200 -
+2024-11-08 13:11:56,822 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 13:12:00,883 - S3Utils - INFO - Sucessfully downloaded file ritik-test/67310959ed8506f8c0844f3b99df30b7 from epack-test1302 s3 bucket 
+2024-11-08 13:12:00,903 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 13:12:00] "GET /get_parts_info?filename=ritik-test/67310959ed8506f8c0844f3b99df30b7 HTTP/1.1" 200 -
+2024-11-08 14:08:54,582 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:08:54,612 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:08:54,614 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:08:54] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:08:55,074 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:08:55,102 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:08:55,103 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:08:55] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:08:55,104 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:08:55,105 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:08:55,134 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:08:55] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:08:55,537 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:08:55,537 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:08:55,568 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:08:55] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:09:00,898 - root - INFO - DXF File Detected
+2024-11-08 14:09:00,900 - root - INFO - DXF File path files\inventory_1.dxf
+2024-11-08 14:09:01,557 - ezdxf - INFO - DXF version upgrade to DXF R2000.
+2024-11-08 14:09:01,561 - ezdxf - INFO - creating ACAD_PLOTSTYLENAME dictionary
+2024-11-08 14:09:01,561 - ezdxf - INFO - creating ACAD_TABLESTYLE dictionary
+2024-11-08 14:09:01,562 - main - INFO - File read Sucessfully
+2024-11-08 14:09:01,563 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 14:09:01,955 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:01,956 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:09:01,983 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 14:09:02,621 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:03,819 - S3Utils - INFO - File ritik-test/99914b932bd37a50b983c5e7c90ae93b uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 14:09:03,849 - S3Utils - INFO - Attempt to upload duplicate
+2024-11-08 14:09:03,850 - main - INFO - Removed file from files\inventory_1.dxf
+2024-11-08 14:09:03,853 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:03] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 14:09:04,555 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:05,516 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:09:05,518 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:05] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:09:06,093 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:07,055 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:09:07,057 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:07] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:09:38,044 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:38] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-08 14:09:38,554 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:38,842 - UserHandler - INFO - Password matched
+2024-11-08 14:09:38,843 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:38] "POST /login HTTP/1.1" 200 -
+2024-11-08 14:09:40,169 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:40,196 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:09:40,198 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:40] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:09:40,739 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:40,769 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:09:40,770 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:40] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:09:40,803 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:40,804 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:09:40,847 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:40] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:09:41,310 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:41,310 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:09:41,341 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:41] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:09:47,219 - root - INFO - DXF File Detected
+2024-11-08 14:09:47,221 - root - INFO - DXF File path files\inventory_1.dxf
+2024-11-08 14:09:47,661 - ezdxf - INFO - DXF version upgrade to DXF R2000.
+2024-11-08 14:09:47,665 - ezdxf - INFO - creating ACAD_PLOTSTYLENAME dictionary
+2024-11-08 14:09:47,666 - ezdxf - INFO - creating ACAD_TABLESTYLE dictionary
+2024-11-08 14:09:47,667 - main - INFO - File read Sucessfully
+2024-11-08 14:09:47,667 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 14:09:48,069 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:48,069 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:09:48,102 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 14:09:48,708 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:49,888 - S3Utils - INFO - File ritik-test/99914b932bd37a50b983c5e7c90ae93b uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 14:09:49,919 - S3Utils - INFO - Attempt to upload duplicate
+2024-11-08 14:09:49,920 - main - INFO - Removed file from files\inventory_1.dxf
+2024-11-08 14:09:49,922 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:49] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 14:09:51,028 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:52,038 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:09:52,041 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:52] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:09:52,669 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:09:53,641 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:09:53,643 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:09:53] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:11:25,602 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:25,634 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:11:25,635 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:25] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:11:26,100 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:26,101 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:11:26,110 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:26,133 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:26] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:11:26,142 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:11:26,143 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:26] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:11:26,650 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:26,650 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:11:26,682 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:26] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:11:49,248 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:49] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-08 14:11:49,714 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:49,998 - UserHandler - INFO - Password matched
+2024-11-08 14:11:49,999 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:49] "POST /login HTTP/1.1" 200 -
+2024-11-08 14:11:51,106 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:51,135 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:11:51,136 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:51] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:11:51,617 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:51,643 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:51,644 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:11:51,651 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:11:51,653 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:51] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:11:51,680 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:51] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:11:52,130 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:52,131 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:11:52,161 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:11:52] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:11:57,250 - root - INFO - DXF File Detected
+2024-11-08 14:11:57,253 - root - INFO - DXF File path files\inventory_1.dxf
+2024-11-08 14:11:57,702 - ezdxf - INFO - DXF version upgrade to DXF R2000.
+2024-11-08 14:11:57,706 - ezdxf - INFO - creating ACAD_PLOTSTYLENAME dictionary
+2024-11-08 14:11:57,706 - ezdxf - INFO - creating ACAD_TABLESTYLE dictionary
+2024-11-08 14:11:57,707 - main - INFO - File read Sucessfully
+2024-11-08 14:11:57,708 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 14:11:58,133 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:58,134 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:11:58,165 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 14:11:58,802 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:11:59,999 - S3Utils - INFO - File ritik-test/99914b932bd37a50b983c5e7c90ae93b uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 14:12:00,027 - S3Utils - INFO - Attempt to upload duplicate
+2024-11-08 14:12:00,028 - main - INFO - Removed file from files\inventory_1.dxf
+2024-11-08 14:12:00,031 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:12:00] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 14:12:01,168 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:12:02,223 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:12:02,225 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:12:02] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:12:02,918 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:12:03,901 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:12:03,903 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:12:03] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:14:41,772 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:14:41,804 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:14:41,805 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:14:41] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:14:42,279 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:14:42,287 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:14:42,288 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:14:42,312 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:14:42,313 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:14:42] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:14:42,320 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:14:42] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:14:42,750 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:14:42,751 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:14:42,780 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:14:42] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:15:24,727 - root - INFO - DXF File Detected
+2024-11-08 14:15:24,733 - root - INFO - DXF File path files\R1.dxf
+2024-11-08 14:15:25,502 - ezdxf - INFO - DXF version upgrade to DXF R2000.
+2024-11-08 14:15:25,506 - ezdxf - INFO - creating ACAD_PLOTSTYLENAME dictionary
+2024-11-08 14:15:25,507 - ezdxf - INFO - creating ACAD_TABLESTYLE dictionary
+2024-11-08 14:15:25,508 - main - INFO - File read Sucessfully
+2024-11-08 14:15:25,509 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 14:15:26,335 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:26,335 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:15:26,374 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 14:15:27,238 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:28,601 - S3Utils - INFO - File ritik-test/99914b932bd37a50b983c5e7c90ae93b uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 14:15:28,633 - S3Utils - INFO - Attempt to upload duplicate
+2024-11-08 14:15:28,634 - main - INFO - Removed file from files\R1.dxf
+2024-11-08 14:15:28,636 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:28] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 14:15:30,976 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:32,552 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:15:32,555 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:32] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:15:34,485 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:35,813 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:15:35,815 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:35] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:15:50,874 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:50] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-08 14:15:51,332 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:51,634 - UserHandler - INFO - Password matched
+2024-11-08 14:15:51,635 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:51] "POST /login HTTP/1.1" 200 -
+2024-11-08 14:15:52,709 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:52,739 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:15:52,740 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:52] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:15:53,209 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:53,218 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:53,219 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:15:53,242 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:15:53,242 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:53] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:15:53,250 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:53] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:15:53,660 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:15:53,661 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:15:53,692 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:15:53] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:16:21,817 - root - INFO - DXF File Detected
+2024-11-08 14:16:21,822 - root - INFO - DXF File path files\advance.dxf
+2024-11-08 14:16:22,694 - main - INFO - File read Sucessfully
+2024-11-08 14:16:22,694 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 14:16:23,186 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:16:23,188 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:16:23,243 - ezdxf - INFO - relative point size is not supported
+2024-11-08 14:16:23,774 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 14:16:23,791 - ezdxf - INFO - relative point size is not supported
+2024-11-08 14:16:24,261 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 14:16:24,281 - ezdxf - INFO - relative point size is not supported
+2024-11-08 14:16:24,769 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 14:16:24,781 - ezdxf - INFO - relative point size is not supported
+2024-11-08 14:16:24,898 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 14:16:24,907 - ezdxf - INFO - relative point size is not supported
+2024-11-08 14:16:25,378 - ImageGenerator - INFO - Image string succesfully generated
+2024-11-08 14:16:25,392 - DXFExtractor - ERROR - Error  too many values to unpack (expected 2)
+2024-11-08 14:16:25,393 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 14:16:26,006 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:16:38,082 - S3Utils - INFO - File ritik-test/9cf9a845e6620019656749ba627e5a42 uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 14:16:38,144 - S3Utils - INFO - File ritik-test/9cf9a845e6620019656749ba627e5a42 metaData uploaded successfully to MongoDB
+2024-11-08 14:16:38,145 - main - INFO - Removed file from files\advance.dxf
+2024-11-08 14:16:38,148 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:16:38] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 14:16:39,398 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:16:43,776 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9cf9a845e6620019656749ba627e5a42 from epack-test1302 s3 bucket 
+2024-11-08 14:16:43,799 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:16:43] "GET /get_parts_info?filename=ritik-test/9cf9a845e6620019656749ba627e5a42 HTTP/1.1" 200 -
+2024-11-08 14:16:44,647 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:16:49,439 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9cf9a845e6620019656749ba627e5a42 from epack-test1302 s3 bucket 
+2024-11-08 14:16:49,461 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:16:49] "GET /get_parts_info?filename=ritik-test/9cf9a845e6620019656749ba627e5a42 HTTP/1.1" 200 -
+2024-11-08 14:17:10,082 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:14,035 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9cf9a845e6620019656749ba627e5a42 from epack-test1302 s3 bucket 
+2024-11-08 14:17:14,058 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:14] "GET /get_parts_info?filename=ritik-test/9cf9a845e6620019656749ba627e5a42 HTTP/1.1" 200 -
+2024-11-08 14:17:14,741 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:22,179 - S3Utils - INFO - Sucessfully downloaded file ritik-test/9cf9a845e6620019656749ba627e5a42 from epack-test1302 s3 bucket 
+2024-11-08 14:17:22,205 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:22] "GET /get_parts_info?filename=ritik-test/9cf9a845e6620019656749ba627e5a42 HTTP/1.1" 200 -
+2024-11-08 14:17:44,843 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:44,873 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:17:44,875 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:44] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:17:45,359 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:45,360 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:17:45,380 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:45,399 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:45] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:17:45,419 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:17:45,421 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:45] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:17:46,182 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:46,183 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:17:46,252 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:46] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:17:52,059 - root - INFO - DXF File Detected
+2024-11-08 14:17:52,062 - root - INFO - DXF File path files\inventory_1.dxf
+2024-11-08 14:17:52,412 - ezdxf - INFO - DXF version upgrade to DXF R2000.
+2024-11-08 14:17:52,416 - ezdxf - INFO - creating ACAD_PLOTSTYLENAME dictionary
+2024-11-08 14:17:52,417 - ezdxf - INFO - creating ACAD_TABLESTYLE dictionary
+2024-11-08 14:17:52,418 - main - INFO - File read Sucessfully
+2024-11-08 14:17:52,418 - DXFExtractor - INFO - Extracting parts from block
+2024-11-08 14:17:52,882 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:52,882 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:17:52,917 - DXFExtractor - INFO - Sucessfully generated blockwise parts dict
+2024-11-08 14:17:53,532 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:54,744 - S3Utils - INFO - File ritik-test/99914b932bd37a50b983c5e7c90ae93b uploaded successfully to epack-test1302 S3 BUCKET
+2024-11-08 14:17:54,772 - S3Utils - INFO - Attempt to upload duplicate
+2024-11-08 14:17:54,772 - main - INFO - Removed file from files\inventory_1.dxf
+2024-11-08 14:17:54,775 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:54] "POST /get_dxf_info HTTP/1.1" 200 -
+2024-11-08 14:17:55,453 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:56,497 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:17:56,499 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:56] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:17:57,250 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:17:58,228 - S3Utils - INFO - Sucessfully downloaded file ritik-test/99914b932bd37a50b983c5e7c90ae93b from epack-test1302 s3 bucket 
+2024-11-08 14:17:58,231 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:17:58] "GET /get_parts_info?filename=ritik-test/99914b932bd37a50b983c5e7c90ae93b HTTP/1.1" 200 -
+2024-11-08 14:18:15,125 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:18:15,153 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:18:15,155 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:18:15] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:18:15,646 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:18:15,647 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:18:15,647 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:18:15,677 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:18:15] "GET /get_inventory_list HTTP/1.1" 200 -
+2024-11-08 14:18:15,677 - ProjectHandler - INFO - Recived the list of project for user epack
+2024-11-08 14:18:15,678 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:18:15] "GET /get_projects?username=epack HTTP/1.1" 200 -
+2024-11-08 14:18:16,453 - MongodbHandler - INFO - You are successfully connected to MongoDB!
+2024-11-08 14:18:16,454 - InventoryHandler - INFO - Sucessfully retrived the list of the all Inventory
+2024-11-08 14:18:16,484 - werkzeug - INFO - 127.0.0.1 - - [08/Nov/2024 14:18:16] "GET /get_inventory_list HTTP/1.1" 200 -
